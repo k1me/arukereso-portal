@@ -8,12 +8,20 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MatToolbar } from '@angular/material/toolbar'
 import { MatFormField } from '@angular/material/form-field'
 import { MatToolbarRow } from '@angular/material/toolbar';
-import { MatIcon } from '@angular/material/icon'
+import { MatIcon } from '@angular/material/icon';
+import { CartComponent } from './cart/cart.component';
+import { HomeComponent } from './home/home.component';
+import { CompareComponent } from './compare/compare.component';
+import { AccountComponent } from './account/account.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    CartComponent,
+    HomeComponent,
+    CompareComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
