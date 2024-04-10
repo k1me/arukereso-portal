@@ -1,0 +1,66 @@
+$color1: #00b7ff;
+$color2: #fa6363;
+$padding: 25px;
+$border-radius: 20px;
+$font-size: 16px;
+$border: $color1 solid 2px;
+
+.login-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $padding;
+}
+
+.login-form-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: $padding;
+    align-items: center;
+    border: $border;
+    border-radius: $border-radius;
+    padding-right: $padding;
+
+    img {
+        width: 370px;
+        border-radius: $border-radius;
+    }
+}
+
+.login-right {
+    display: flex;
+    flex-direction: column;
+    padding: $padding;
+    border-radius: $border-radius;
+    color: $color1;
+    font-size: $font-size;
+
+    h2 {
+        font-size: 35px;
+        margin-bottom: 5px;
+    }
+
+    input {
+        border: $border;
+        padding: calc($padding - 10px);
+        border-radius: $border-radius;
+        font-size: $font-size;
+        margin: 0px 0px 0px 0px;
+    }
+
+    button {
+        border: none;
+        padding: $padding;
+        border-radius: $border-radius;
+        background-color: $color2;
+        color: white;
+        font-size: $font-size;
+    }
+}
+
+.login-right a {
+    color: $color2;
+    font-size: $font-size;
+    margin-top: 10px;
+    align-self: center;
+}

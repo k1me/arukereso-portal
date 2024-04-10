@@ -1,0 +1,42 @@
+<div class="login-wrapper">
+  <div class="login-form-wrapper">
+    <img src="../../../../assets/pictures/login_all.png" alt="login" />
+    <form>
+      <div class="login-right">
+        <h2>Jelentkezzen be,</h2>
+        <p>hogy egyszerűen és gyorsan tudja intézni rendeléseit.</p>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Felhasználónév"
+            formControlName="username"
+          />
+          <!--
+                        <mat-error *ngIf="loginForm.get('username').hasError('required')">
+                            Felhasználónév megadása kötelező!
+                        </mat-error>
+                    -->
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Jelszó"
+            formControlName="password"
+            type="password"
+          />
+          <!--
+                        <mat-error *ngIf="loginForm.get('password').hasError('required')">
+                            Jelszó megadása kötelező!
+                        </mat-error>
+                    -->
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">
+          Bejelentkezés
+        </button>
+        <a routerLink="/register">Még nincs fiókja?</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
