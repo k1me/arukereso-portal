@@ -68,7 +68,19 @@ ul {
   gap: 15px;
 }
 
-li:hover {
+a mat-icon {
+  color: black;
+}
+
+li:hover a mat-icon{
   color: $color1;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
+
+p:hover {
   cursor: pointer;
 }
