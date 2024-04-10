@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -20,6 +21,11 @@ import { LogoutComponent } from './navbar/account/logout/logout.component';
 import { LoginComponent } from './navbar/account/login/login.component';
 import { RegisterComponent } from './navbar/account/register/register.component';
 import { DeletionComponent } from './navbar/account/deletion/deletion.component';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from '../environments/environment';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+
 
 @NgModule({
   declarations: [
@@ -44,9 +50,12 @@ import { DeletionComponent } from './navbar/account/deletion/deletion.component'
     MatFormField,
     MatToolbarRow,
     MatIcon,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
+    AngularFireAuthModule
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
   ],
   bootstrap: [AppComponent]
 })
