@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthUser } from '../../../interfaces/user';
 
 @Component({
   selector: 'app-register',
@@ -27,15 +23,20 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-    redirect() {
-      location.replace('/login');
+  async register() {
+    if (this.registerForm.invalid) {
+      return;
     }
 
-    async register() {
-      const { email, password } = this.registerForm.value;
-      await this.authService.register(email, password)
-      .then(() => {  
-      this.redirect();
-    });
+    const userData: AuthUser = {
+      email: this.registerForm.value.email,
+      password: this.registerForm.value.password,
+    };
+
+    try {
+      await this.authService.register(userData);
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
