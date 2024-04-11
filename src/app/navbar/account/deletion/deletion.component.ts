@@ -11,6 +11,7 @@ import { FormBuilder } from '@angular/forms';
 })
 export class DeletionComponent implements OnInit {
   deletionForm: FormGroup = new FormGroup({});
+  errorMessage: string = '';
   constructor(
     private authService: AuthService,
     private formBuilder: FormBuilder,
@@ -27,19 +28,31 @@ export class DeletionComponent implements OnInit {
     location.replace('');
   }
 
-  async delete() {
+  async deleteAccount() {
     const { password } = this.deletionForm.value;
-    const user = await this.afAuth.currentUser;
-    const email = user?.email;
-    console.log(email, password);
-    if (email && password !== '') {
-      await this.afAuth.signInWithEmailAndPassword(email, password).then(() => {
-        this.authService.deleteAccount(password);
-      });
-    console.log("itt vagyunk2");
-
+    try {
+      await this.validatePassword(password);
+    } catch (error) {
+      console.error('Hiba a fiók törlése során:', error);
+      this.errorMessage = 'Nem megfelelő jelszó.';
     }
-    console.log("itt vagyunk3");
+  }
 
+  async validatePassword(password: string) {
+    const user = await this.afAuth.currentUser;
+    if (!user) {
+      throw new Error('Nincs bejelentkezett felhasználó.');
+    }
+    const email = user.email;
+    if (!email || password === '') {
+      throw new Error('Nincs jelszó megadva.');
+    }
+    await this.DeleteUser(email, password);
+  }
+
+  async DeleteUser(email: string, password: string) {
+    await this.afAuth.signInWithEmailAndPassword(email, password).then(() => {
+      this.authService.deleteAccount(password);
+    });
   }
 }
