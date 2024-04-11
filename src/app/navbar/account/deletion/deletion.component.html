@@ -1,1 +1,18 @@
-<p>deletion works!</p>
+<div class="feature-content">
+  <h2>Biztos törölni akarja a fiókját?</h2>
+  <form [formGroup]="deletionForm" (ngSubmit)="delete()">
+    <div class="button-wrapper">
+        <mat-form-field>
+            <input
+            matInput
+            formControlName="password"
+            placeholder="Jelenlegi jelszó"
+            type="password"
+            required
+            />
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Törlés</button>
+    </div>
+    </form>
+</div>
+<router-outlet></router-outlet>
