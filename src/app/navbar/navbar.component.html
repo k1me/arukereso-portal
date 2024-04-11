@@ -20,9 +20,12 @@
         <li>
           <a routerLink="/cart"><mat-icon>shopping_cart</mat-icon></a>
         </li>
-        <li>
-          <a routerLink="/login"><mat-icon>account_circle</mat-icon></a>
+        <li *ngIf="isSessionSet(); else notLoggedIn">
+          <a routerLink="/account"><mat-icon>account_circle</mat-icon></a>
         </li>
+        <ng-template #notLoggedIn>
+          <a routerLink="/login"><mat-icon>account_circle</mat-icon></a>
+        </ng-template>
       </ul>
     </div>
   </div>

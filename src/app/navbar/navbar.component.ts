@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
+isSessionSet(): any {
+    return sessionStorage.getItem('session-cookie');
+}
 
 }
