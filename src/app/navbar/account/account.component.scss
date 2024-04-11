@@ -10,8 +10,12 @@ $border: $color1 solid 2px;
   flex-direction: row;
   width: 100%;
   padding: $padding;
-  max-width: 1200px;  
-  margin:  auto;  
+  max-width: 1200px;
+  margin: auto;
+  
+  .feature-content {
+    flex-grow: 1;
+  }
 }
 
 .features-list {
