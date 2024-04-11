@@ -40,14 +40,6 @@ $border: $color1 solid 2px;
         margin-bottom: 5px;
     }
 
-    input {
-        border: $border;
-        padding: calc($padding - 10px);
-        border-radius: $border-radius;
-        font-size: $font-size;
-        margin: 0px 0px 0px 0px;
-    }
-
     button {
         border: none;
         padding: $padding;
@@ -55,6 +47,7 @@ $border: $color1 solid 2px;
         background-color: $color2;
         color: white;
         font-size: $font-size;
+        cursor: pointer;
     }
 }
 

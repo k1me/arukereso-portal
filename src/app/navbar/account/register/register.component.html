@@ -1,37 +1,29 @@
 <div class="register-wrapper">
   <div class="register-form-wrapper">
     <img src="../../../../assets/pictures/reg_all.png" alt="login" />
-    <form>
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
       <div class="register-right">
         <h2>Regisztráljon most!</h2>
         <p>Egyszerűen és gyorsan intézheti rendeléseit.</p>
         <mat-form-field>
           <input
             matInput
-            placeholder="Felhasználónév"
-            formControlName="username"
+            formControlName="email"
+            placeholder="Email cím"
+            required
           />
-          <!--
-                          <mat-error *ngIf="loginForm.get('username').hasError('required')">
-                              Felhasználónév megadása kötelező!
-                          </mat-error>
-                      -->
         </mat-form-field>
         <mat-form-field>
           <input
             matInput
-            placeholder="Jelszó"
             formControlName="password"
+            placeholder="Jelszó"
             type="password"
+            required
           />
-          <!--
-                          <mat-error *ngIf="loginForm.get('password').hasError('required')">
-                              Jelszó megadása kötelező!
-                          </mat-error>
-                      -->
         </mat-form-field>
         <button mat-raised-button color="primary" type="submit">
-          Bejelentkezés
+          Regisztráció
         </button>
         <a routerLink="/login">Már van fiókja?</a>
       </div>
