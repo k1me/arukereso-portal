@@ -1,9 +1,9 @@
 $color1: #00b7ff;
 $color2: #fa6363;
-$padding: 10px;
-$border-radius: 5px;
-$font-size: 16px;
-$border: $color1 solid 2px;
+$padding: 25px;
+$border-radius: 20px;
+$font-size: 20px;
+$border: $color1 solid 1px;
 
 .login-wrapper {
     display: flex;
@@ -41,13 +41,17 @@ $border: $color1 solid 2px;
     }
 
     button {
-        border: none;
+        border: $color2 solid 2px;
         padding: $padding;
         border-radius: $border-radius;
-        background-color: $color2;
-        color: white;
+        background-color: white;
+        color: $color2;
         font-size: $font-size;
         cursor: pointer;
+    }
+    button:hover {
+        background-color: $color2;
+        color: white;
     }
 }
 

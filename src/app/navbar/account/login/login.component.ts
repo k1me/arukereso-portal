@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthUser } from '../../../interfaces/user';
 
 @Component({
   selector: 'app-login',
@@ -22,23 +23,24 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  reloadPage() {
-    location.replace('/account');
+  redirect() {
+    location.replace('/account/dashboard');
   }
 
   async login() {
-    const { email, password } = this.loginForm.value;
-    await this.authService
-      .login(email, password)
-      .then((credential: any) => {
-        const user = credential.user;
-        const uid = user.uid;
-        sessionStorage.setItem('session-cookie', uid);
-        this.reloadPage();
-      })
-      .catch((error) => {
-        this.errorMessage = 'Nem megfelelő email vagy jelszó.';
-        console.error(error);
-      });
+    if (this.loginForm.invalid) {
+      return;
+    }
+
+    const userData: AuthUser = {
+      password: this.loginForm.value.password,
+      email: this.loginForm.value.email,
+    };
+
+    try {
+      await this.authService.login(userData);
+    } catch (error) {
+      this.errorMessage = 'Nem megfelelő email vagy jelszó.';
+    }
   }
 }
