@@ -34,10 +34,12 @@ export class AuthService {
       const uid = userCredentials.user?.uid;
       await this.db
         .collection('Users')
-        .doc(uid)
+        .doc(user.email)
         .set({
           email: user.email,
           password: this.hashedPassword(user.password),
+          name: '',
+          uid: uid,
         });
       this.redirectTo('login');
     } catch (error) {
@@ -77,18 +79,43 @@ export class AuthService {
         console.error(error);
       });
   }
-  changePassword(email: string, oldPassword: string, newPassword: string) {}
+  async changePassword(newPassword: string) {
+    try {
+      const user = await this.afAuth.currentUser;
+      if (user) {
+        await user.updatePassword(newPassword);
+        await this.updatePasswordInFire(user.email || '', newPassword);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
-  async deleteAccount(password: string) {
+  updatePasswordInFire(email: string, newPassword: string) {
+    this.db
+      .collection('Users')
+      .doc(email)
+      .update({
+        password: this.hashedPassword(newPassword),
+      })
+      .then(() => {
+        this.redirectTo('login');
+      })
+      .catch((error) => {
+        console.error('Hiba a jelszó frissítése során:', error);
+      });
+  }
+
+  async deleteAccount() {
     const user = await this.afAuth.currentUser;
     if (user) {
       try {
         await user.delete();
         await this.deleteAccountFromFire();
+        location.replace('');
       } catch (error) {
-        console.error(error);
+        throw error;
       }
-      location.replace('');
     }
   }
 
@@ -100,7 +127,7 @@ export class AuthService {
         .delete();
       this.clearSessionCookie();
     } catch (error) {
-      console.error('Error deleting user from Firestore:', error);
+      console.error('Hiba a fiók törlése során:', error);
     }
   }
 }

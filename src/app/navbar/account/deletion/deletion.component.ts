@@ -33,7 +33,7 @@ export class DeletionComponent implements OnInit {
     try {
       await this.validatePassword(password);
     } catch (error) {
-      console.error('Hiba a fiók törlése során:', error);
+      //console.error('Hiba a fiók törlése során:', error);
       this.errorMessage = 'Nem megfelelő jelszó.';
     }
   }
@@ -52,7 +52,7 @@ export class DeletionComponent implements OnInit {
 
   async DeleteUser(email: string, password: string) {
     await this.afAuth.signInWithEmailAndPassword(email, password).then(() => {
-      this.authService.deleteAccount(password);
+      this.authService.deleteAccount();
     });
   }
 }
