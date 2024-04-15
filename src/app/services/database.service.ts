@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AuthUser } from '../interfaces/user';
 import * as bcrypt from 'bcryptjs';
+import { Product } from '../interfaces/product';
 
 @Injectable({
   providedIn: 'root',
@@ -16,11 +17,23 @@ export class DatabaseService {
   }
 
   async getCategories() {
-    return this.db.collection('Categories').valueChanges();
   }
 
-  async getProducts() {
-    return this.db.collection('Products').valueChanges();
+  async getProducts(): Promise<Product[]> {
+    try {
+      const querySnapshot = await this.db.collection('Product').get().toPromise();
+      const products: Product[] = [];
+      if (querySnapshot) {
+        querySnapshot.forEach((doc) => {
+          const product = doc.data() as Product;
+          products.push(product);
+        });
+      }
+      return products;
+    } catch (error) {
+      console.error('Error getting products: ', error);
+      throw error;
+    }
   }
 
   async getProductsByCategory(category: string) {

@@ -81,4 +81,8 @@ export class AuthService {
       this.redirectTo('login');
     }
   }
+
+  async getUser() {
+    return this.afAuth.currentUser;
+  }
 }
