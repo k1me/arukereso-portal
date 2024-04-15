@@ -1,3 +1,40 @@
-<p>profile works!</p>
-<router-outlet></router-outlet>
+<form (ngSubmit)="setMissingData()">
+  <div class="user-data-container">
+    <h2>Profile</h2>
+    <div class="user-data-input-container">
+      <label for="lastName">Vezetéknév:</label>
+      <input
+        type="text"
+        id="lastName"
+        name="lastName"
+        [(ngModel)]="user.lastName"
+      />
 
+      <label for="firstName">Keresztnév:</label>
+      <input
+        type="text"
+        id="firstName"
+        name="firstName"
+        [(ngModel)]="user.firstName"
+      />
+
+      <label for="address">Lakcím:</label>
+      <input
+        type="text"
+        id="address"
+        name="address"
+        [(ngModel)]="user.address"
+      />
+      <button type="submit">Mentés</button>
+
+      <label>E-mail:</label>
+        <p>{{user.email}}</p>
+      <label>Szerepkör:</label>
+      <p>{{user.role ? "admin" : "felhasználó"}}</p>
+
+      <label>Regisztrálva ekkor:</label>
+        <p>{{user.registeredOn}}</p>
+    </div>
+  </div>
+</form>
+<router-outlet></router-outlet>
