@@ -11,6 +11,7 @@ import { RegisterComponent } from './navbar/account/register/register.component'
 import { LogoutComponent } from './navbar/account/logout/logout.component';
 import { PasswordComponent } from './navbar/account/password/password.component';
 import { DeletionComponent } from './navbar/account/deletion/deletion.component';
+import { ProductsComponent } from './home/products/products.component';
 
 const accountRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -20,8 +21,13 @@ const accountRoutes: Routes = [
   { path: 'logout', component: LogoutComponent },
 ];
 
+const homeRoutes: Routes = [
+  { path: 'products', component: ProductsComponent },
+
+];
+
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: HomeComponent, children: homeRoutes},
   { path: 'cart', component: CartComponent },
   { path: 'account', component: AccountComponent, children: accountRoutes },
   { path: 'compare', component: CompareComponent },
