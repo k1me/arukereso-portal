@@ -1,0 +1,23 @@
+<div class="product-wrapper">
+  <mat-card>
+    <div class="product">
+      <div class="product-info">
+
+            <img [src]="product.image" alt="product image" />
+        <div class="product-info-text">
+            <mat-card>
+                <p>{{ product.name }}</p>
+                <p>{{ product.price }}Ft</p>
+                <button>Vásárlás</button>
+            </mat-card>
+        </div>
+      </div>
+      <div>
+        <h2>Termék leírása:</h2>
+        <p>{{ product.description }}</p>
+      </div>
+    </div>
+  </mat-card>
+</div>
+
+<router-outlet></router-outlet>
