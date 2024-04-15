@@ -28,6 +28,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { ProductsComponent } from './home/products/products.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { MatInputModule } from '@angular/material/input';
     LogoutComponent,
     LoginComponent,
     RegisterComponent,
-    DeletionComponent
+    DeletionComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,
