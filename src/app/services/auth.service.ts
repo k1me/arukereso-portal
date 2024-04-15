@@ -1,24 +1,26 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import 'firebase/compat/auth';
-import * as bcrypt from 'bcryptjs';
 import { AuthUser } from '../interfaces/user';
+import { DatabaseService } from './database.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private afAuth: AngularFireAuth, private db: AngularFirestore) {}
+  constructor(private afAuth: AngularFireAuth, private db: DatabaseService) {}
 
-  hashedPassword(password: string): string {
-    const salt = bcrypt.genSaltSync(10);
-    const hashedPassword = bcrypt.hashSync(password, salt);
-    return hashedPassword;
-  }
-
-  clearSessionCookie() {
-    sessionStorage.removeItem('session-cookie');
+  setSessionCookie(command: string, value?: string) {
+    switch (command) {
+      case 'set':
+        sessionStorage.setItem('session-cookie', value || '');
+        break;
+      case 'clear':
+        sessionStorage.removeItem('session-cookie');
+        break;
+      default:
+        break;
+    }
   }
 
   redirectTo(endpoint: string) {
@@ -31,16 +33,7 @@ export class AuthService {
         user.email,
         user.password
       );
-      const uid = userCredentials.user?.uid;
-      await this.db
-        .collection('Users')
-        .doc(user.email)
-        .set({
-          email: user.email,
-          password: this.hashedPassword(user.password),
-          name: '',
-          uid: uid,
-        });
+      await this.db.setUser(user, userCredentials.user?.uid || '');
       this.redirectTo('login');
     } catch (error) {
       throw error;
@@ -49,85 +42,43 @@ export class AuthService {
 
   async login(userData: AuthUser) {
     try {
-      const credentials = await this.afAuth.signInWithEmailAndPassword(
+      const userCredentials = await this.afAuth.signInWithEmailAndPassword(
         userData.email,
         userData.password
       );
-      this.processLogin(credentials);
+      this.setSessionCookie('set', userCredentials.user?.uid);
       this.redirectTo('account/dashboard');
     } catch (error) {
       throw error;
     }
   }
 
-  processLogin(credentials: any) {
-    const user = credentials.user;
-    const uid = user.uid;
-    sessionStorage.setItem('session-cookie', uid);
-  }
-
   logout() {
-    this.afAuth
-      .signOut()
-      .then(() => {
-        this.clearSessionCookie();
-      })
-      .then(() => {
-        location.replace('');
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-  async changePassword(newPassword: string) {
     try {
-      const user = await this.afAuth.currentUser;
-      if (user) {
-        await user.updatePassword(newPassword);
-        await this.updatePasswordInFire(user.email || '', newPassword);
-      }
+      this.afAuth.signOut();
+      this.setSessionCookie('clear');
+      location.replace('login');
     } catch (error) {
-      console.error(error);
+      throw error;
     }
   }
-
-  updatePasswordInFire(email: string, newPassword: string) {
-    this.db
-      .collection('Users')
-      .doc(email)
-      .update({
-        password: this.hashedPassword(newPassword),
-      })
-      .then(() => {
-        this.redirectTo('login');
-      })
-      .catch((error) => {
-        console.error('Hiba a jelszó frissítése során:', error);
-      });
+  async changePassword(newPassword: string) {
+    const user = await this.afAuth.currentUser;
+    if (user) {
+      await user.updatePassword(newPassword);
+      await this.db.updatePassword(user.email || '', newPassword);
+      this.setSessionCookie('clear');
+      this.redirectTo('login');
+    }
   }
 
   async deleteAccount() {
     const user = await this.afAuth.currentUser;
     if (user) {
-      try {
-        await user.delete();
-        await this.deleteAccountFromFire();
-        location.replace('');
-      } catch (error) {
-        throw error;
-      }
-    }
-  }
-
-  async deleteAccountFromFire() {
-    try {
-      await this.db
-        .collection('Users')
-        .doc(sessionStorage.getItem('session-cookie') || '')
-        .delete();
-      this.clearSessionCookie();
-    } catch (error) {
-      console.error('Hiba a fiók törlése során:', error);
+      await user.delete();
+      await this.db.deleteUser(user.email || '');
+      this.setSessionCookie('clear');
+      this.redirectTo('login');
     }
   }
 }
