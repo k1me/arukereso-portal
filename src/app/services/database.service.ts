@@ -19,19 +19,35 @@ export class DatabaseService {
   async getCategories() {
   }
 
-  async getProducts(): Promise<Product[]> {
+  async getProducts() {
     try {
-      const querySnapshot = await this.db.collection('Product').get().toPromise();
-      const products: Product[] = [];
-      if (querySnapshot) {
-        querySnapshot.forEach((doc) => {
-          const product = doc.data() as Product;
-          products.push(product);
-        });
+      const snapshot = await this.db.collection('Product').get().toPromise();
+      if (snapshot) {
+        return snapshot.docs.map(doc => doc.data() as Product);
       }
-      return products;
+      return [];
     } catch (error) {
-      console.error('Error getting products: ', error);
+      console.error('Nem sikerült lekérni az adatokat', error);
+      throw error;
+    }
+  }
+
+  async getProduct(id: string) {
+    try {
+      const snapshot = await this.db.collection('Product').doc(id.toString()).get().toPromise();
+      if (snapshot) {
+        return snapshot.data() as Product;
+      }
+      return {
+        id: 0,
+        name: 'Nem ismert termék',
+        price: 0,
+        description: 'Nincs leírás',
+        image: '',
+        category: 'Ismeretlen',
+      } as Product;
+    } catch (error) {
+      console.error('Nem sikerült lekérni az adatokat', error);
       throw error;
     }
   }
