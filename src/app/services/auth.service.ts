@@ -3,12 +3,13 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import 'firebase/compat/auth';
 import { AuthUser } from '../interfaces/user';
 import { DatabaseService } from './database.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private afAuth: AngularFireAuth, private db: DatabaseService) {}
+  constructor(private afAuth: AngularFireAuth, private db: DatabaseService, private router: Router) {}
 
   setSessionCookie(command: string, value?: string) {
     switch (command) {
@@ -24,7 +25,7 @@ export class AuthService {
   }
 
   redirectTo(endpoint: string) {
-    location.replace('/' + endpoint);
+    this.router.navigate([endpoint]);
   }
 
   async register(user: AuthUser) {
@@ -57,7 +58,7 @@ export class AuthService {
     try {
       this.afAuth.signOut();
       this.setSessionCookie('clear');
-      location.replace('login');
+      this.redirectTo('login');
     } catch (error) {
       throw error;
     }

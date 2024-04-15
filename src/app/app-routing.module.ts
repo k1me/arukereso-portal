@@ -33,7 +33,6 @@ const routes: Routes = [
   { path: 'compare', component: CompareComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'logout', component: LogoutComponent },
   { path: '**', redirectTo: '' },
 ];
 
