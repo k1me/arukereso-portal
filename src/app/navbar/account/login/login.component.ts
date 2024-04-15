@@ -23,10 +23,6 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  redirect() {
-    location.replace('/account/dashboard');
-  }
-
   async login() {
     if (this.loginForm.invalid) {
       return;

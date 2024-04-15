@@ -29,6 +29,8 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { ProductsComponent } from './home/products/products.component';
+import { MatCardModule } from '@angular/material/card';
+import { ProductComponent } from './home/products/product/product.component';
 
 
 @NgModule({
@@ -46,7 +48,9 @@ import { ProductsComponent } from './home/products/products.component';
     LoginComponent,
     RegisterComponent,
     DeletionComponent,
-    ProductsComponent
+    ProductsComponent,
+    ProductComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -60,7 +64,8 @@ import { ProductsComponent } from './home/products/products.component';
     AngularFireAuthModule,
     FormsModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    MatCardModule,
   ],
   providers: [
     provideAnimationsAsync(),

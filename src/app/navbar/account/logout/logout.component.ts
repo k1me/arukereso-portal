@@ -9,13 +9,9 @@ import { AuthService } from '../../../services/auth.service';
 export class LogoutComponent {
   constructor(private authService: AuthService) {}
 
-  redirect() {
-    location.replace('');
-  }
 
   logout() {
     this.authService.logout();
-    this.redirect();
   }
 
 }

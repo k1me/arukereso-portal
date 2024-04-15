@@ -24,10 +24,6 @@ export class DeletionComponent implements OnInit {
     });
   }
 
-  redirect() {
-    location.replace('');
-  }
-
   async deleteAccount() {
     const { password } = this.deletionForm.value;
     try {
