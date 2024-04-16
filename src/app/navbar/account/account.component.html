@@ -5,6 +5,7 @@
     <a routerLink="/account/password">Jelszó módósítása</a>
     <a routerLink="/account/deletion">Fiók törlése</a>
     <a routerLink="/account/logout">Kijelentkezés</a>
+    <a routerLink="/account/new-product" *ngIf="user.role">Új termék</a>
   </div>
   <div class="feature-content">
     <router-outlet></router-outlet>

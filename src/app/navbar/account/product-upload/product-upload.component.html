@@ -1,0 +1,66 @@
+<div class="new-product-wrapper">
+    <div class="product-form-wrapper">
+        <mat-card>
+
+            <form [formGroup]="newProductForm" (ngSubmit)="uploadProduct()">
+                <div class="register-right">
+                    <h2>Regisztráljon most!</h2>
+                    <p>Egyszerűen és gyorsan intézheti rendeléseit.</p>
+                    <mat-form-field>
+                        <input
+                        matInput
+                        formControlName="category"
+                        placeholder="Kategória"
+                        required
+                        />
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input
+                        matInput
+                        formControlName="description"
+                        placeholder="Termék leírása"
+                        required
+                        />
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input
+                        matInput
+                        formControlName="id"
+                        placeholder="Termék azonoító"
+                        required
+                        />
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input
+                        matInput
+                        formControlName="image"
+                        placeholder="Kép url-je"
+                        required
+                        />
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input
+                        matInput
+                        formControlName="name"
+                        placeholder="Termék neve"
+                        required
+                        />
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input
+                        matInput
+                        formControlName="price"
+                        placeholder="Termék ára"
+                        required
+                        />
+                    </mat-form-field>
+                    <button mat-raised-button type="submit">
+                        Mentés
+                    </button>
+                </div>
+            </form>
+        </mat-card>
+    </div>
+</div>
+<router-outlet></router-outlet>
+
