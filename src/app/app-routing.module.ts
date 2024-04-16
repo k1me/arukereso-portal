@@ -21,12 +21,13 @@ const accountRoutes: Routes = [
   { path: 'password', component: PasswordComponent },
   { path: 'deletion', component: DeletionComponent},
   { path: 'logout', component: LogoutComponent },
+  { path: 'new-product', component: ProductUploadComponent },
+  { path: '' , redirectTo: 'dashboard', pathMatch: 'full' },
 ];
 
 const homeRoutes: Routes = [
   { path: '', component: ProductsComponent },
   { path: 'products/:id', component: ProductComponent },
-
 ];
 
 const routes: Routes = [
@@ -37,7 +38,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'new-product', component: ProductUploadComponent },
-  { path: '**', redirectTo: '/products' },
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({
