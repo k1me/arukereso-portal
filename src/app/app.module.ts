@@ -31,6 +31,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ProductsComponent } from './home/products/products.component';
 import { MatCardModule } from '@angular/material/card';
 import { ProductComponent } from './home/products/product/product.component';
+import { ProductUploadComponent } from './navbar/account/product-upload/product-upload.component';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { ProductComponent } from './home/products/product/product.component';
     DeletionComponent,
     ProductsComponent,
     ProductComponent,
+    ProductUploadComponent,
     
   ],
   imports: [
