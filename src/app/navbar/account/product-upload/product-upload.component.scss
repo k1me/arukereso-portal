@@ -1,0 +1,55 @@
+$color1: #00b7ff;
+$color2: #fa6363;
+$padding: 10px;
+$margin: 30px;
+$border-radius: 5px;
+$font-size: 16px;
+$border: $color1 solid 2px;
+
+.new-product-wrapper {
+  margin: $margin;
+
+  mat-card {
+    padding: $padding;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+      rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    border-radius: $border-radius;
+
+    .product-form-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .input-wrapper {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+
+        .left-side-wrapper {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+        .right-side-wrapper {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+      }
+
+      button {
+        padding: $padding;
+        border-radius: $border-radius;
+        background-color: white;
+        border: $color2 solid 2px;
+        color: $color2;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: $color2;
+        color: white;
+      }
+    }
+  }
+}
