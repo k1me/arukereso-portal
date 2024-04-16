@@ -7,7 +7,7 @@ import firebase from 'firebase/compat/app';
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
-  styleUrl: './account.component.scss'
+  styleUrl: './account.component.scss',
 })
 export class AccountComponent {
   user: User = {
@@ -20,28 +20,21 @@ export class AccountComponent {
     registeredOn: new Date(),
     password: '',
   };
-  
-  constructor(private db: DatabaseService, private authService: AuthService) {
+
+  constructor(private db: DatabaseService, private authService: AuthService) {}
+
+  ngOnInit() {
     this.getUserData();
   }
-
-  async getUserData() {
-    const email = await this.authService
-      .getUser()
-      .then((user) => user?.email || '');
-    if (email) {
-      await this.getUserFromFire(email);
-    }
-  }
-
-  async getUserFromFire(email: string) {
-    this.db.getUser(email).then((doc) => {
-      const userData = doc as User;
-      this.user = userData;
+  
+  getUserData() {
+    const user = this.authService.dbUser;
+    if (user) {
+      this.user = user;
       this.user.registeredOn =
-        userData.registeredOn instanceof firebase.firestore.Timestamp
-          ? userData.registeredOn.toDate()
-          : userData.registeredOn;
-    });
+        user.registeredOn instanceof firebase.firestore.Timestamp
+          ? user.registeredOn.toDate()
+          : user.registeredOn;
+    }
   }
 }

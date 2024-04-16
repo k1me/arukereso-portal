@@ -1,4 +1,5 @@
-<div class="home-wrapper">
+<div *ngIf="loading">Loading...</div>
+<div class="home-wrapper" *ngIf="!loading">
   <div class="category-wrapper">
     <h2>Kategóriák:</h2>
     <div class="category" *ngFor="let category of categories">

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import 'firebase/compat/auth';
-import { AuthUser } from '../interfaces/user';
+import { AuthUser, User } from '../interfaces/user';
 import { DatabaseService } from './database.service';
 import { Router } from '@angular/router';
 
@@ -9,7 +9,16 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private afAuth: AngularFireAuth, private db: DatabaseService, private router: Router) {}
+  authUser: AuthUser = {} as AuthUser;
+  dbUser: User = {} as User;
+
+  constructor(private afAuth: AngularFireAuth, private db: DatabaseService, private router: Router) {
+    this.afAuth.authState.subscribe((user) => {
+      if (user) {
+        this.setSessionCookie('set', user.uid);
+      }
+    });
+  }
 
   setSessionCookie(command: string, value?: string) {
     switch (command) {
@@ -48,6 +57,7 @@ export class AuthService {
         userData.password
       );
       this.setSessionCookie('set', userCredentials.user?.uid);
+      this.dbUser = await this.db.getUser(userData.email) as User;
       this.redirectTo('account/dashboard');
     } catch (error) {
       throw error;

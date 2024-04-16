@@ -3,12 +3,18 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AuthUser, User } from '../interfaces/user';
 import * as bcrypt from 'bcryptjs';
 import { Product } from '../interfaces/product';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DatabaseService {
-  constructor(private db: AngularFirestore) {}
+  products: Product[] = [];
+  productsChanged = new Subject<Product[]>();
+
+  constructor(private db: AngularFirestore) {
+    this.getProducts();
+  }
 
   hashValue(value: string): string {
     const salt = bcrypt.genSaltSync(10);
@@ -86,9 +92,9 @@ export class DatabaseService {
     try {
       const snapshot = await this.db.collection('Product').get().toPromise();
       if (snapshot) {
-        return snapshot.docs.map((doc) => doc.data() as Product);
+        this.products = snapshot.docs.map((doc) => doc.data() as Product);
+        this.productsChanged.next(this.products);
       }
-      return [];
     } catch (error) {
       console.error('Nem sikerült lekérni az adatokat', error);
       throw error;

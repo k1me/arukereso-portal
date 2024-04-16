@@ -23,7 +23,7 @@ export class ProductsComponent {
     private searchService: SearchService
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.routeSub = this.route.params.subscribe((params) => {
       this.category = params['category'];
       this.getProducts();
@@ -33,10 +33,12 @@ export class ProductsComponent {
     this.searchSub = this.searchService.searchTermChanged.subscribe(() => {
       this.searchProducts();
     });
+
+    await this.getProducts();
   }
 
   async filterProducts() {
-    const allProducts = await this.db.getProducts();
+    const allProducts = this.db.products;
     if (this.category) {
       this.products = allProducts.filter(
         (product) => product.category === this.category
@@ -47,11 +49,11 @@ export class ProductsComponent {
   }
 
   async getProducts() {
-    this.products = await this.db.getProducts();
+    this.products = this.db.products;
   }
 
   async searchProducts() {
-    const allProducts = await this.db.getProducts();
+    const allProducts = this.db.products;
     if (this.searchService.searchTerm) {
       this.products = allProducts.filter((product) =>
         product.name.toLowerCase().includes(this.searchService.searchTerm.toLowerCase()) ||
