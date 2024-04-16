@@ -9,7 +9,7 @@ import { DatabaseService } from '../services/database.service';
 })
 export class HomeComponent {
   products: Product[] = [];
-  categories: string[] = [];
+  categories: Set<string> = new Set();
 
   ngOnInit(): void {}
 
@@ -19,14 +19,12 @@ export class HomeComponent {
 
   async getAllData() {
     this.products = await this.db.getProducts();
-    console.log(this.products);
   }
 
   async getCategories() {
     await this.getAllData();
     for (const product of this.products) {
-      this.categories.push(product.category);
+      this.categories.add(product.category);
     }
-    console.log(this.categories);
   }
 }

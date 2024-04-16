@@ -24,8 +24,9 @@ export class ProductUploadComponent implements OnInit {
     });
   }
 
-  uploadProduct() {
+  async uploadProduct() {
     const product: Product = this.newProductForm.value;
-    this.db.addProduct(product);    
+    await this.db.addProduct(product);
+    window.location.href = '/account/new-product';    
   }
 }

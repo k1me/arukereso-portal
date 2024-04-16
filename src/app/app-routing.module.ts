@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { CartComponent } from './navbar/cart/cart.component';
 import { AccountComponent } from './navbar/account/account.component';
-import { CompareComponent } from './navbar/compare/compare.component';
 import { DashboardComponent } from './navbar/account/dashboard/dashboard.component';
 import { ProfileComponent } from './navbar/account/profile/profile.component';
 import { LoginComponent } from './navbar/account/login/login.component';
@@ -34,7 +33,6 @@ const routes: Routes = [
   { path: '', component: HomeComponent, children: homeRoutes},
   { path: 'cart', component: CartComponent },
   { path: 'account', component: AccountComponent, children: accountRoutes },
-  { path: 'compare', component: CompareComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'new-product', component: ProductUploadComponent },
