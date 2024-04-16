@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { User } from '../../../interfaces/user';
 import firebase from 'firebase/compat/app';
 import { AuthService } from '../../../services/auth.service';
+import { DatabaseService } from '../../../services/database.service';
 
 @Component({
   selector: 'app-profile',
@@ -10,7 +10,7 @@ import { AuthService } from '../../../services/auth.service';
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent {
-  constructor(private db: AngularFirestore, private authService: AuthService) {}
+  constructor(private authService: AuthService, private db: DatabaseService) {}
 
   user: User = {
     uid: '',
@@ -35,32 +35,20 @@ export class ProfileComponent {
       await this.getUserFromFire(email);
     }
   }
+
   async getUserFromFire(email: string) {
-    this.db
-      .collection('Users')
-      .doc(email)
-      .get()
-      .subscribe((doc) => {
-        const userData = doc.data() as User;
-        this.user.address = userData.address;
-        this.user.email = userData.email;
-        this.user.firstName = userData.firstName;
-        this.user.lastName = userData.lastName;
-        this.user.registeredOn =
-          userData.registeredOn instanceof firebase.firestore.Timestamp
-            ? userData.registeredOn.toDate()
-            : userData.registeredOn;
-        this.user.role = userData.role;
-        this.user.uid = userData.uid;
-      });
+    this.db.getUser(email).then((doc) => {
+      const userData = doc as User;
+      this.user = userData;
+      this.user.registeredOn =
+        userData.registeredOn instanceof firebase.firestore.Timestamp
+          ? userData.registeredOn.toDate()
+          : userData.registeredOn;
+    });
   }
 
   async setMissingData() {
-    await this.db.collection('Users').doc(this.user.email).update({
-      firstName: this.user.firstName,
-      lastName: this.user.lastName,
-      address: this.user.address,
-    });
+    await this.db.updateUser(this.user);
     this.authService.redirectTo('account/dashboard');
   }
 }

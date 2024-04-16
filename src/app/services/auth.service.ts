@@ -84,6 +84,7 @@ export class AuthService {
   }
 
   async getUser() {
-    return this.afAuth.currentUser;
+    const user = await this.afAuth.currentUser; 
+    return user;
   }
 }

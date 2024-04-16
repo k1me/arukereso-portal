@@ -3,7 +3,6 @@ import { Product } from '../../../interfaces/product';
 import { DatabaseService } from '../../../services/database.service';
 import { ActivatedRoute } from '@angular/router';
 
-
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -13,15 +12,13 @@ export class ProductComponent {
   product: Product = {
     category: '',
     description: '',
-    id: 0,
+    id: '',
     image: '',
     name: '',
     price: 0,
   };
 
-  constructor(private db: DatabaseService,
-    private route: ActivatedRoute
-  ) {
+  constructor(private db: DatabaseService, private route: ActivatedRoute) {
     this.getProduct();
   }
 
@@ -32,6 +29,5 @@ export class ProductComponent {
 
   async getProduct() {
     this.product = await this.db.getProduct(this.getProductId());
-
   }
 }

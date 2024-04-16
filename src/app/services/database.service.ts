@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { AuthUser } from '../interfaces/user';
+import { AuthUser, User } from '../interfaces/user';
 import * as bcrypt from 'bcryptjs';
 import { Product } from '../interfaces/product';
-import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -40,17 +39,26 @@ export class DatabaseService {
   async getUser(email: string) {
     try {
         const snapshot = await this.db.collection('Users').doc(email).get().toPromise();
-        console.log(snapshot);
       if (snapshot) {
-        console.log(snapshot.data());
-        return snapshot.data();
+        return snapshot.data() as User;
       }
-      return [];
+      return {};
     } catch (error) {
       console.error('Nem sikerült lekérni az adatokat', error);
       throw error;
     }
+  }
 
+  async updateUser(user: User) {
+    try {
+      await this.db.collection('Users').doc(user.email).update({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        address: user.address,
+      });
+    } catch (error) {
+      throw error;
+    }
   }
 
   async updatePassword(email: string, password: string) {
@@ -98,7 +106,7 @@ export class DatabaseService {
         return snapshot.data() as Product;
       }
       return {
-        id: 0,
+        id: '',
         name: 'Nem ismert termék',
         price: 0,
         description: 'Nincs leírás',
@@ -115,5 +123,13 @@ export class DatabaseService {
     return this.db
       .collection('Products', (ref) => ref.where('category', '==', category))
       .valueChanges();
+  }
+
+  async addProduct(product: Product) {
+    try {
+      await this.db.collection('Product').doc(product.id).set(product);
+    } catch (error) {
+      throw error;
+    }
   }
 }
