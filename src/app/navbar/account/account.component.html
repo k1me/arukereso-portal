@@ -1,11 +1,23 @@
 <div class="account-wrapper">
   <div class="features-list">
-    <a routerLink="/account/dashboard">Dashboard</a>
-    <a routerLink="/account/profile">Saját adatok</a>
-    <a routerLink="/account/password">Jelszó módósítása</a>
-    <a routerLink="/account/deletion">Fiók törlése</a>
-    <a routerLink="/account/logout">Kijelentkezés</a>
-    <a routerLink="/account/new-product" *ngIf="user.role">Új termék</a>
+    <mat-card>
+      <a routerLink="/account/dashboard">Dashboard</a>
+    </mat-card>
+    <mat-card>
+      <a routerLink="/account/profile">Saját adatok</a>
+    </mat-card>
+    <mat-card>
+      <a routerLink="/account/password">Jelszó módósítása</a>
+    </mat-card>
+    <mat-card>
+      <a routerLink="/account/deletion">Fiók törlése</a>
+    </mat-card>
+    <mat-card>
+      <a routerLink="/account/logout">Kijelentkezés</a>
+    </mat-card>
+    <mat-card>
+      <a routerLink="/account/new-product" *ngIf="user.role">Új termék</a>
+    </mat-card>
   </div>
   <div class="feature-content">
     <router-outlet></router-outlet>
