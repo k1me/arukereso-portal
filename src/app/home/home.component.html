@@ -1,12 +1,13 @@
 <div class="home-wrapper">
   <div class="category-wrapper">
-      <div class="category" *ngFor="let category of dummy" >
-        <mat-card>
-          <a>{{category}}</a>
-        </mat-card>
-      </div>
+    <h2>Kategóriák:</h2>
+    <div class="category" *ngFor="let category of categories">
+      <mat-card>
+        <a>{{ category }}</a>
+      </mat-card>
     </div>
-    <div class="products-wrapper">
-      <router-outlet></router-outlet>
-    </div>
+  </div>
+  <div class="products-wrapper">
+    <router-outlet></router-outlet>
+  </div>
 </div>

@@ -1,15 +1,32 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from '../interfaces/product';
+import { DatabaseService } from '../services/database.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
 })
-export class HomeComponent implements OnInit{
-  dummy: string[] = ['dummy1', 'dummy2', 'dummy3', 'dummy4', 'dummy5', 'dummy6', 'dummy7', 'dummy8', 'dummy9', 'dummy10'];
+export class HomeComponent {
+  products: Product[] = [];
+  categories: string[] = [];
 
   ngOnInit(): void {}
 
-  constructor() {}
+  constructor(private db: DatabaseService) {
+    this.getCategories();
+  }
 
+  async getAllData() {
+    this.products = await this.db.getProducts();
+    console.log(this.products);
+  }
+
+  async getCategories() {
+    await this.getAllData();
+    for (const product of this.products) {
+      this.categories.push(product.category);
+    }
+    console.log(this.categories);
+  }
 }

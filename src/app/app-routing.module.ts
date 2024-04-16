@@ -13,6 +13,7 @@ import { PasswordComponent } from './navbar/account/password/password.component'
 import { DeletionComponent } from './navbar/account/deletion/deletion.component';
 import { ProductsComponent } from './home/products/products.component';
 import { ProductComponent } from './home/products/product/product.component';
+import { ProductUploadComponent } from './navbar/account/product-upload/product-upload.component';
 
 const accountRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -23,7 +24,7 @@ const accountRoutes: Routes = [
 ];
 
 const homeRoutes: Routes = [
-  { path: 'products', component: ProductsComponent },
+  { path: '', component: ProductsComponent },
   { path: 'products/:id', component: ProductComponent },
 
 ];
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: 'compare', component: CompareComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'new-product', component: ProductUploadComponent },
   { path: '**', redirectTo: '/products' },
 ];
 

@@ -12,37 +12,45 @@ $border: $color1 solid 2px;
   padding: $padding;
   max-width: 1200px;
   margin: auto;
-  
+
   .products-wrapper {
     flex-grow: 1;
   }
 }
 
-.category-wrapper .category{
-  display: flex;
-  flex-direction: column;
-
-  mat-card {
+.category-wrapper {
+  h2 {
+    color: $color2;
+    font-size: 24px;
     margin: 5px;
-    max-width: 250px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-    a {
+  }
+
+  .category {
+    display: flex;
+    flex-direction: column;
+
+    mat-card {
+      margin: 5px;
+      max-width: 250px;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+        rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+      a {
         color: $color1;
         text-decoration: none;
         font-size: $font-size;
         border-radius: $border-radius;
         margin: 5px;
         transition: all 0.3s ease;
-        
-    }
-    &:hover {
+      }
+      &:hover {
         background-color: $color1;
         color: white;
         cursor: pointer;
 
         a {
-            color: white;
+          color: white;
         }
+      }
     }
   }
 }
