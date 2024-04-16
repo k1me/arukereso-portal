@@ -26,6 +26,7 @@ const accountRoutes: Routes = [
 
 const homeRoutes: Routes = [
   { path: '', component: ProductsComponent },
+  { path: 'products/category/:category', component: ProductsComponent },
   { path: 'products/:id', component: ProductComponent },
 ];
 

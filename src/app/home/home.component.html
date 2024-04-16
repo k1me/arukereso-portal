@@ -3,7 +3,7 @@
     <h2>Kategóriák:</h2>
     <div class="category" *ngFor="let category of categories">
       <mat-card>
-        <a>{{ category }}</a>
+        <a [routerLink]="['/products/category',category]">{{ category }}</a>
       </mat-card>
     </div>
   </div>
