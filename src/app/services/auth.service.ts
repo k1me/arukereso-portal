@@ -27,6 +27,10 @@ export class AuthService {
         break;
       case 'clear':
         sessionStorage.removeItem('session-cookie');
+        sessionStorage.removeItem('user-role');
+        break;
+      case 'set_bonus':
+        sessionStorage.setItem('user-role', value || '');
         break;
       default:
         break;
@@ -58,6 +62,9 @@ export class AuthService {
       );
       this.setSessionCookie('set', userCredentials.user?.uid);
       this.dbUser = await this.db.getUser(userData.email) as User;
+      if (this.dbUser.role) {
+        this.setSessionCookie('set_bonus', 'true');
+      }
       this.redirectTo('account/dashboard');
     } catch (error) {
       throw error;

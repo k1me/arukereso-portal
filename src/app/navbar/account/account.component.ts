@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { User } from '../../interfaces/user';
-import { DatabaseService } from '../../services/database.service';
 import { AuthService } from '../../services/auth.service';
 import firebase from 'firebase/compat/app';
 
@@ -10,6 +9,7 @@ import firebase from 'firebase/compat/app';
   styleUrl: './account.component.scss',
 })
 export class AccountComponent {
+  userRole: boolean = false;
   user: User = {
     uid: '',
     email: '',
@@ -21,12 +21,14 @@ export class AccountComponent {
     password: '',
   };
 
-  constructor(private db: DatabaseService, private authService: AuthService) {}
+  constructor(private authService: AuthService) {
+    this.userRole = sessionStorage.getItem('user-role') === 'true';
+  }
 
   ngOnInit() {
     this.getUserData();
   }
-  
+
   getUserData() {
     const user = this.authService.dbUser;
     if (user) {
