@@ -33,6 +33,7 @@ export class ProductComponent {
   }
 
   addToCart() {
+    console.log(this.product)
     this.cartService.addToCart(this.product);
   }
 }

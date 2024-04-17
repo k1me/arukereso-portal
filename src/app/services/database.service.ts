@@ -4,6 +4,7 @@ import { AuthUser, User } from '../interfaces/user';
 import * as bcrypt from 'bcryptjs';
 import { Product } from '../interfaces/product';
 import { Subject } from 'rxjs';
+import { Cart } from '../interfaces/cart';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,7 @@ import { Subject } from 'rxjs';
 export class DatabaseService {
   products: Product[] = [];
   productsChanged = new Subject<Product[]>();
+  orders: Cart[] = [];
 
   constructor(private db: AngularFirestore) {
     this.getProducts();
@@ -67,13 +69,13 @@ export class DatabaseService {
     }
   }
 
-  async updatePassword(email: string, password: string) {
+  async updatePassword(authUser: AuthUser) {
     try {
       await this.db
         .collection('Users')
-        .doc(email)
+        .doc(authUser.email)
         .update({
-          password: this.hashValue(password),
+          password: this.hashValue(authUser.password),
         });
     } catch (error) {
       throw error;
@@ -135,6 +137,46 @@ export class DatabaseService {
     try {
       await this.db.collection('Product').doc(product.id).set(product);
     } catch (error) {
+      throw error;
+    }
+  }
+
+  async addOrder(cart: Product[], uid: string) {
+    let total: number = 0;
+    for (let product of cart) {
+      total += Number(product.price);
+      console.log(typeof product.price);
+    }
+    try {
+      await this.db.collection('Orders').add({
+        uid: uid,
+        products: cart.map((product) => {
+          return {
+            id: product.id,
+            name: product.name,
+            price: product.price,
+          };
+        }),
+        date: new Date(),
+        total: total,
+      });
+      sessionStorage.setItem('cart', JSON.stringify([]));
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getOrders(uid: string) {
+    try {
+      const snapshot = await this.db
+        .collection('Orders', (ref) => ref.where('uid', '==', uid))
+        .get()
+        .toPromise();
+      if (snapshot) {
+         this.orders =  snapshot.docs.map((doc) => doc.data() as Cart);
+      }
+    } catch (error) {
+      console.error('Nem sikerült lekérni az adatokat', error);
       throw error;
     }
   }

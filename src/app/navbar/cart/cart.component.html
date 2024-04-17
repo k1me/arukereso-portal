@@ -1,2 +1,10 @@
 <h1>Shopping Cart</h1>
+<ul>
+  <li *ngFor="let product of cart">
+    <mat-card> {{ product.name }} - {{ product.price | currency }} </mat-card>
+    <button (click)="removeFromCart(product.id)">-</button>
+  </li>
+</ul>
+    <p>{{error}}</p>
+<button mat-raised-button color="primary" (click)="checkOut()">Vásárlás</button>
 <router-outlet></router-outlet>

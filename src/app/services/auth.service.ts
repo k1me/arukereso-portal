@@ -61,6 +61,7 @@ export class AuthService {
         userData.password
       );
       this.setSessionCookie('set', userCredentials.user?.uid);
+      sessionStorage.setItem('cart', JSON.stringify([]));
       this.dbUser = await this.db.getUser(userData.email) as User;
       if (this.dbUser.role) {
         this.setSessionCookie('set_bonus', 'true');
@@ -82,9 +83,12 @@ export class AuthService {
   }
   async changePassword(newPassword: string) {
     const user = await this.afAuth.currentUser;
+    const authUser: AuthUser = {} as AuthUser;
+    authUser.email = user?.email || '';
+    authUser.password = newPassword;
     if (user) {
       await user.updatePassword(newPassword);
-      await this.db.updatePassword(user.email || '', newPassword);
+      await this.db.updatePassword(authUser);
       this.setSessionCookie('clear');
       this.redirectTo('login');
     }

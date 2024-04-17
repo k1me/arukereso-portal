@@ -13,10 +13,12 @@ import { DeletionComponent } from './navbar/account/deletion/deletion.component'
 import { ProductsComponent } from './home/products/products.component';
 import { ProductComponent } from './home/products/product/product.component';
 import { ProductUploadComponent } from './navbar/account/product-upload/product-upload.component';
+import { OrdersComponent } from './navbar/account/orders/orders.component';
 
 const accountRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: 'orders', component: OrdersComponent },
   { path: 'password', component: PasswordComponent },
   { path: 'deletion', component: DeletionComponent},
   { path: 'logout', component: LogoutComponent },

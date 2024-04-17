@@ -31,6 +31,7 @@ import { ProductsComponent } from './home/products/products.component';
 import { MatCardModule } from '@angular/material/card';
 import { ProductComponent } from './home/products/product/product.component';
 import { ProductUploadComponent } from './navbar/account/product-upload/product-upload.component';
+import { OrdersComponent } from './navbar/account/orders/orders.component';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { ProductUploadComponent } from './navbar/account/product-upload/product-
     ProductsComponent,
     ProductComponent,
     ProductUploadComponent,
+    OrdersComponent,
     
   ],
   imports: [

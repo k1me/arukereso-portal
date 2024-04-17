@@ -53,7 +53,6 @@ export class PasswordComponent implements OnInit {
   }
 
   async changeOldPassword(email:string, oldPassword: string) {
-  
     await this.afAuth.signInWithEmailAndPassword(email, oldPassword).then(() => {
       this.authService.changePassword(this.passwordForm.value.newPassword);
     });
