@@ -1,28 +1,23 @@
-$color1: #00b7ff;
-$color2: #fa6363;
-$padding: 15px;
-$margin: 30px;
-$border-radius: 5px;
-$font-size: 16px;
-$border: $color1 solid 2px;
+@import '../../../../assets/themes/light/abstract/mixins';
+@import '../../../../assets/themes/light/abstract/variables';
+
 
 .product-wrapper {
   margin: $margin;
+  padding: $padding;
 
   mat-card {
+    @include box-shadow;
     padding: $padding;
-    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
-      rgba(0, 0, 0, 0.23) 0px 6px 6px;
     border-radius: $border-radius;
 
     .product {
-      display: flex;
-      flex-flow: column;
+      @include flex-column;
 
       .product-info {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
+        @include flex-center;
+        @include flex-row;
+
 
         img {
           max-height: 200px;
@@ -34,8 +29,8 @@ $border: $color1 solid 2px;
           flex-direction: column;
           align-items: left;
 
-          mat-card {
-            box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px inset, rgba(0, 0, 0, 0.23) 0px 6px 6px inset;
+          button {
+            @include button-def;
           }
 
           p:first-child {

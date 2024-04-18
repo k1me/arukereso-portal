@@ -1,49 +1,39 @@
-$color1: #00b7ff;
-$color2: #fa6363;
-$padding: 5px;
-$border-radius: 5px;
-$font-size: 16px;
-$border: $color1 solid 2px;
+@import '../../assets/themes/light/abstract/mixins';
+@import '../../assets/themes/light/abstract/variables';
+
 
 .home-wrapper {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  padding: $padding;
-  max-width: 1200px;
-  margin: auto;
+  @include flex-row;
+  justify-content: center;
+
 
   .products-wrapper {
+    max-width: 1000px;
     flex-grow: 1;
   }
 }
 
 .category-wrapper {
   h2 {
-    color: $color2;
-    font-size: 24px;
-    margin: 5px;
+    color: $color-red;
+    margin: $margin;
   }
 
   .category {
-    display: flex;
-    flex-direction: column;
+    @include flex-column;
 
     mat-card {
       margin: 5px;
-      max-width: 250px;
-      box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-        rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+      @include box-shadow;
       a {
-        color: $color1;
+        color: $color-blue;
         text-decoration: none;
-        font-size: $font-size;
         border-radius: $border-radius;
         margin: 5px;
         transition: all 0.3s ease;
       }
       &:hover {
-        background-color: $color1;
+        background-color: $color-blue;
         color: white;
         cursor: pointer;
 

@@ -1,11 +1,9 @@
-<div class="dashboard-wrapper" *ngIf="progress === 100; else welcome">
-  <mat-card>
-    <h2>Üdvözli a Portéka-fürkésző oldal,</h2>
-    <h2>{{ user.firstName }}!</h2>
-    <div class="progress-container">
-      <div class="progress-bar" [style.width.%]="progress">{{ progress }}%</div>
-    </div>
-  </mat-card>
+<div *ngIf="progress === 100; else welcome">
+  <div class="dashboard-wrapper">
+    <mat-card>
+      <h2>Üdvözli a Portéka-fürkésző oldal, {{ user.firstName }}!</h2>
+    </mat-card>
+  </div>
 </div>
 <ng-template #welcome>
   <div class="dashboard-wrapper">

@@ -1,10 +1,18 @@
-<h1>Shopping Cart</h1>
-<ul>
-  <li *ngFor="let product of cart">
-    <mat-card> {{ product.name }} - {{ product.price | currency }} </mat-card>
-    <button (click)="removeFromCart(product.id)">-</button>
-  </li>
-</ul>
+<div class="cart-wrapper">
+  <div class="inside-wrapper">
+    <h1>Shopping Cart</h1>
+    <ul>
+      <li *ngFor="let product of cart">
+        <mat-card> 
+          <p>
+            {{ product.name }} - {{ product.price | currency }} 
+            <button (click)="removeFromCart(product.id)">-</button>
+          </p>
+        </mat-card>
+      </li>
+    </ul>
     <p>{{error}}</p>
-<button mat-raised-button color="primary" (click)="checkOut()">Vásárlás</button>
+    <button mat-raised-button color="primary" (click)="checkOut()">Vásárlás</button>
+  </div>
+</div>
 <router-outlet></router-outlet>

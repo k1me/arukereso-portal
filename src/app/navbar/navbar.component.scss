@@ -10,8 +10,8 @@ mat-toolbar {
   @include flex-row;
   width: 100%;
   max-width: 1200px;
-  justify-content: space-between;
-  padding: 0 15px;
+  @include flex-space-between;
+  padding: $padding;
 
   .left-side-wrapper {
     @include flex-row;

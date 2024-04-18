@@ -7,7 +7,8 @@
   mat-card {
     @include box-shadow;
     @include flex-center;
-
+    padding: $padding;
+    margin: $margin;
     .account-progress {
       .progress-container {
         @include flex-center;
@@ -35,6 +36,7 @@
   @include flex-column;
   @include flex-center;
   padding: $padding;
+  margin: $margin;
   h3 {
     margin: $margin;
   }
@@ -51,7 +53,7 @@
     &:hover {
       background-color: $color-red;
       a {
-        color:white;
+        color: white;
       }
     }
   }

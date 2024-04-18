@@ -1,0 +1,32 @@
+@import "../../../assets/themes/light/abstract/mixins";
+@import "../../../assets/themes/light/abstract/variables";
+
+.cart-wrapper {
+    @include flex-center;
+  .inside-wrapper {
+    @include flex-center;
+    @include flex-column;
+    
+    padding: $padding;
+    margin: $margin;
+    max-width: 1200px;
+
+    button {
+      @include button-def;
+      max-width: 250px;
+      &:hover {
+        color: white;
+        background-color: $color-red;
+      }
+    }
+  }
+}
+mat-card {
+  @include box-shadow;
+  @include flex-space-between;
+
+  p {
+    padding: $padding;
+    margin: $margin;
+  }
+}
