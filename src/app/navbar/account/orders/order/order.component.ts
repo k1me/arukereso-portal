@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { Cart } from '../../../../interfaces/cart';
+import { Cart } from '../../../../shared/interfaces/cart';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import firebase from 'firebase/compat/app';
-import { OrderService } from '../../../../services/order.service';
-
+import { OrderService } from '../../../../shared/services/order.service';
 
 @Component({
   selector: 'app-order',
@@ -22,7 +21,7 @@ export class OrderComponent {
   ) {}
 
   ngOnInit() {
-    this.orderIdSub = this.route.params.subscribe(params => {
+    this.orderIdSub = this.route.params.subscribe((params) => {
       this.id = params['id'];
 
       for (let order of this.orderService.orders) {
@@ -30,7 +29,10 @@ export class OrderComponent {
           this.order = order;
         }
       }
-      this.order.date = this.order.date instanceof firebase.firestore.Timestamp ? this.order.date.toDate() : this.order.date;
+      this.order.date =
+        this.order.date instanceof firebase.firestore.Timestamp
+          ? this.order.date.toDate()
+          : this.order.date;
     });
   }
 

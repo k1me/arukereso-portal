@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../services/auth.service';
+import { AuthService } from '../../../shared/services/auth.service';
 import { FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormBuilder } from '@angular/forms';
@@ -28,7 +28,7 @@ export class PasswordComponent implements OnInit {
   }
 
   changePassword() {
-    const {oldPassword, newPassword, newPasswordRe } = this.passwordForm.value;
+    const { oldPassword, newPassword, newPasswordRe } = this.passwordForm.value;
     if (newPassword !== newPasswordRe) {
       this.errorMessage = 'A két jelszó nem egyezik.';
       return;
@@ -52,9 +52,11 @@ export class PasswordComponent implements OnInit {
     await this.changeOldPassword(email, oldPassword);
   }
 
-  async changeOldPassword(email:string, oldPassword: string) {
-    await this.afAuth.signInWithEmailAndPassword(email, oldPassword).then(() => {
-      this.authService.changePassword(this.passwordForm.value.newPassword);
-    });
+  async changeOldPassword(email: string, oldPassword: string) {
+    await this.afAuth
+      .signInWithEmailAndPassword(email, oldPassword)
+      .then(() => {
+        this.authService.changePassword(this.passwordForm.value.newPassword);
+      });
   }
 }

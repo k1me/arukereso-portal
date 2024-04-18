@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../services/auth.service';
+import { Component } from '@angular/core';
+import { AuthService } from '../../../shared/services/auth.service';
 import { FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormBuilder } from '@angular/forms';
@@ -9,7 +9,7 @@ import { FormBuilder } from '@angular/forms';
   templateUrl: './deletion.component.html',
   styleUrl: './deletion.component.scss',
 })
-export class DeletionComponent implements OnInit {
+export class DeletionComponent {
   deletionForm: FormGroup = new FormGroup({});
   errorMessage: string = '';
   constructor(

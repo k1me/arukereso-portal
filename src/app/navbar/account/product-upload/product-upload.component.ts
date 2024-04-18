@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Product } from '../../../interfaces/product';
-import { CartService } from '../../../services/cart.service';
+import { Product } from '../../../shared/interfaces/product';
+import { CartService } from '../../../shared/services/cart.service';
 
 @Component({
   selector: 'app-product-upload',
@@ -11,7 +11,10 @@ import { CartService } from '../../../services/cart.service';
 export class ProductUploadComponent implements OnInit {
   newProductForm: FormGroup = new FormGroup({});
 
-  constructor(private cartService: CartService, private formBuilder: FormBuilder) {}
+  constructor(
+    private cartService: CartService,
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.newProductForm = this.formBuilder.group({
@@ -27,6 +30,6 @@ export class ProductUploadComponent implements OnInit {
   async uploadProduct() {
     const product: Product = this.newProductForm.value;
     await this.cartService.addProduct(product);
-    window.location.href = '/account/new-product';    
+    window.location.href = '/account/new-product';
   }
 }

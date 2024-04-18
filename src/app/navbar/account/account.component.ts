@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { User } from '../../interfaces/user';
-import { AuthService } from '../../services/auth.service';
+import { User } from '../../shared/interfaces/user';
+import { AuthService } from '../../shared/services/auth.service';
 import firebase from 'firebase/compat/app';
 
 @Component({

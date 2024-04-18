@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../services/auth.service';
+import { Component } from '@angular/core';
+import { AuthService } from '../../../shared/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthUser } from '../../../interfaces/user';
+import { AuthUser } from '../../../shared/interfaces/user';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
   registerForm: FormGroup = new FormGroup({});
 
   constructor(

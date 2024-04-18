@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { Product } from '../../interfaces/product';
+import { Product } from '../../shared/interfaces/product';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { SearchService } from '../../services/search.service';
-import { CartService } from '../../services/cart.service';
+import { SearchService } from '../../shared/services/search.service';
+import { CartService } from '../../shared/services/cart.service';
 
 @Component({
   selector: 'app-products',

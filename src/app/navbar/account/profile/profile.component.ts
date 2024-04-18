@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { User } from '../../../interfaces/user';
+import { User } from '../../../shared/interfaces/user';
 import firebase from 'firebase/compat/app';
-import { AuthService } from '../../../services/auth.service';
-import { UserService } from '../../../services/user.service';
+import { AuthService } from '../../../shared/services/auth.service';
+import { UserService } from '../../../shared/services/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -10,7 +10,10 @@ import { UserService } from '../../../services/user.service';
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent {
-  constructor(private authService: AuthService, private userService: UserService) {}
+  constructor(
+    private authService: AuthService,
+    private userService: UserService
+  ) {}
 
   user: User = {
     uid: '',
