@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Product } from '../../interfaces/product';
-import { DatabaseService } from '../../services/database.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { SearchService } from '../../services/search.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-products',
@@ -18,7 +18,7 @@ export class ProductsComponent {
   searchTerm: string = '';
 
   constructor(
-    private db: DatabaseService,
+    private cartService: CartService,
     private route: ActivatedRoute,
     private searchService: SearchService
   ) {}
@@ -38,7 +38,7 @@ export class ProductsComponent {
   }
 
   async filterProducts() {
-    const allProducts = this.db.products;
+    const allProducts = this.cartService.products;
     if (this.category) {
       this.products = allProducts.filter(
         (product) => product.category === this.category
@@ -49,11 +49,11 @@ export class ProductsComponent {
   }
 
   async getProducts() {
-    this.products = this.db.products;
+    this.products = this.cartService.products;
   }
 
   async searchProducts() {
-    const allProducts = this.db.products;
+    const allProducts = this.cartService.products;
     if (this.searchService.searchTerm) {
       this.products = allProducts.filter((product) =>
         product.name.toLowerCase().includes(this.searchService.searchTerm.toLowerCase()) ||

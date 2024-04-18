@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../interfaces/product';
-import { DatabaseService } from '../services/database.service';
 import { Subscription } from 'rxjs';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-home',
@@ -15,18 +15,18 @@ export class HomeComponent {
 
   categories: Set<string> = new Set();
 
-  constructor(private db: DatabaseService) {}
+  constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
-    this.productSub = this.db.productsChanged.subscribe(() => {
-      this.products = this.db.products;
+    this.productSub = this.cartService.productsChanged.subscribe(() => {
+      this.products = this.cartService.products;
       this.getCategories();
     });
   }
 
   async getAllData() {
-    if (!(this.db.products.length === 0)) {
-      this.products = this.db.products;
+    if (!(this.cartService.products.length === 0)) {
+      this.products = this.cartService.products;
       this.loading = false;
     }
   }

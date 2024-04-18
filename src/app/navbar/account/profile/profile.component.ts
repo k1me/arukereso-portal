@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { User } from '../../../interfaces/user';
 import firebase from 'firebase/compat/app';
 import { AuthService } from '../../../services/auth.service';
-import { DatabaseService } from '../../../services/database.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -10,7 +10,7 @@ import { DatabaseService } from '../../../services/database.service';
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent {
-  constructor(private authService: AuthService, private db: DatabaseService) {}
+  constructor(private authService: AuthService, private userService: UserService) {}
 
   user: User = {
     uid: '',
@@ -37,7 +37,7 @@ export class ProfileComponent {
   }
 
   async getUserFromFire(email: string) {
-    this.db.getUser(email).then((doc) => {
+    this.userService.getUser(email).then((doc) => {
       const userData = doc as User;
       this.user = userData;
       this.user.registeredOn =
@@ -48,7 +48,7 @@ export class ProfileComponent {
   }
 
   async setMissingData() {
-    await this.db.updateUser(this.user);
+    await this.userService.updateUser(this.user);
     this.authService.redirectTo('account/dashboard');
   }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Cart } from '../../../interfaces/cart';
-import { DatabaseService } from '../../../services/database.service';
+import { CartService } from '../../../services/cart.service';
+import { OrderService } from '../../../services/order.service';
 
 @Component({
   selector: 'app-orders',
@@ -10,7 +11,7 @@ import { DatabaseService } from '../../../services/database.service';
 export class OrdersComponent {
   orders: Cart[] = [];
 
-  constructor(private db: DatabaseService) {}
+  constructor(private orderService: OrderService) {}
 
   ngOnInit() {
     this.getOrders();
@@ -20,7 +21,7 @@ export class OrdersComponent {
     if (!uid) {
       return;
     }
-    await this.db.getOrders(uid);
-    this.orders = this.db.orders;
+    await this.orderService.getOrders(uid);
+    this.orders = this.orderService.orders;
   }
 }

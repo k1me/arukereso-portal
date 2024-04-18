@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Product } from '../../../interfaces/product';
-import { DatabaseService } from '../../../services/database.service';
 import { ActivatedRoute } from '@angular/router';
 import { CartService } from '../../../services/cart.service';
 
@@ -19,7 +18,7 @@ export class ProductComponent {
     price: 0,
   };
 
-  constructor(private db: DatabaseService, private route: ActivatedRoute, private cartService: CartService) {
+  constructor(private route: ActivatedRoute, private cartService: CartService) {
     this.getProduct();
   }
 
@@ -29,11 +28,11 @@ export class ProductComponent {
   }
 
   async getProduct() {
-    this.product = await this.db.getProduct(this.getProductId());
+    this.product = await this.cartService.getProduct(this.getProductId());
   }
 
   addToCart() {
-    console.log(this.product)
+    console.log(this.product);
     this.cartService.addToCart(this.product);
   }
 }

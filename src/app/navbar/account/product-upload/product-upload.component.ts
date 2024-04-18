@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DatabaseService } from '../../../services/database.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Product } from '../../../interfaces/product';
+import { CartService } from '../../../services/cart.service';
 
 @Component({
   selector: 'app-product-upload',
@@ -11,7 +11,7 @@ import { Product } from '../../../interfaces/product';
 export class ProductUploadComponent implements OnInit {
   newProductForm: FormGroup = new FormGroup({});
 
-  constructor(private db: DatabaseService, private formBuilder: FormBuilder) {}
+  constructor(private cartService: CartService, private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
     this.newProductForm = this.formBuilder.group({
@@ -26,7 +26,7 @@ export class ProductUploadComponent implements OnInit {
 
   async uploadProduct() {
     const product: Product = this.newProductForm.value;
-    await this.db.addProduct(product);
+    await this.cartService.addProduct(product);
     window.location.href = '/account/new-product';    
   }
 }

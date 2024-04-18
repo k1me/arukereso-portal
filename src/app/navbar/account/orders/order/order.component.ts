@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Cart } from '../../../../interfaces/cart';
 import { ActivatedRoute } from '@angular/router';
-import { DatabaseService } from '../../../../services/database.service';
 import { Subscription } from 'rxjs';
 import firebase from 'firebase/compat/app';
+import { OrderService } from '../../../../services/order.service';
 
 
 @Component({
@@ -18,14 +18,14 @@ export class OrderComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private db: DatabaseService
+    private orderService: OrderService
   ) {}
 
   ngOnInit() {
     this.orderIdSub = this.route.params.subscribe(params => {
       this.id = params['id'];
 
-      for (let order of this.db.orders) {
+      for (let order of this.orderService.orders) {
         if (order.id === this.id) {
           this.order = order;
         }

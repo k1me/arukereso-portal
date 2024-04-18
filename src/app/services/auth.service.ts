@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import 'firebase/compat/auth';
 import { AuthUser, User } from '../interfaces/user';
-import { DatabaseService } from './database.service';
 import { Router } from '@angular/router';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +12,7 @@ export class AuthService {
   authUser: AuthUser = {} as AuthUser;
   dbUser: User = {} as User;
 
-  constructor(private afAuth: AngularFireAuth, private db: DatabaseService, private router: Router) {
+  constructor(private afAuth: AngularFireAuth, private userService: UserService, private router: Router) {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.setSessionCookie('set', user.uid);
@@ -47,7 +47,7 @@ export class AuthService {
         user.email,
         user.password
       );
-      await this.db.setUser(user, userCredentials.user?.uid || '');
+      await this.userService.setUser(user, userCredentials.user?.uid || '');
       this.redirectTo('login');
     } catch (error) {
       throw error;
@@ -62,7 +62,7 @@ export class AuthService {
       );
       this.setSessionCookie('set', userCredentials.user?.uid);
       sessionStorage.setItem('cart', JSON.stringify([]));
-      this.dbUser = await this.db.getUser(userData.email) as User;
+      this.dbUser = await this.userService.getUser(userData.email) as User;
       if (this.dbUser.role) {
         this.setSessionCookie('set_bonus', 'true');
       }
@@ -88,7 +88,7 @@ export class AuthService {
     authUser.password = newPassword;
     if (user) {
       await user.updatePassword(newPassword);
-      await this.db.updatePassword(authUser);
+      await this.userService.updatePassword(authUser);
       this.setSessionCookie('clear');
       this.redirectTo('login');
     }
@@ -98,7 +98,7 @@ export class AuthService {
     const user = await this.afAuth.currentUser;
     if (user) {
       await user.delete();
-      await this.db.deleteUser(user.email || '');
+      await this.userService.deleteUser(user.email || '');
       this.setSessionCookie('clear');
       this.redirectTo('login');
     }
