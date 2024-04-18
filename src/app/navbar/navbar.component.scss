@@ -1,88 +1,137 @@
-$color1: #00b7ff;
-$color2: #fa6363;
-$padding: 5px;
-$border-radius: 5px;
-$font-size: 16px;
-$border: $color1 solid 2px;
+@import "../../assets/themes/light/abstract/variables";
+@import "../../assets/themes/light/abstract/mixins";
 
+mat-toolbar {
+  background-color: $color-neutral;
+  color: white;
+  justify-content: center;
+}
 .header-wrapper {
-  display: flex;
-  justify-content: space-between;
+  @include flex-row;
   width: 100%;
-  padding: $padding;
-  max-width: 1200px;  
-  margin: 0 auto;  
-}
+  max-width: 1200px;
+  justify-content: space-between;
+  padding: 0 15px;
 
-.right-side-wrapper {
-  display: flex;
-  align-items: center;
-  line-height: 1;
-}
+  .left-side-wrapper {
+    @include flex-row;
+    gap: 10px;
+    align-items: center;
 
-.left-side-wrapper {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  gap: 10px;
-}
+    a {
+      font-size: $font-size-big;
+      text-decoration: none;
 
-.blue-text {
-  color: $color1;
-}
-
-.red-text {
-  font-style: bold;
-  color: $color2;
-}
-
-.search-wrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: $padding;
-
-  input {
-    border: none;
-    border-radius: $border-radius 0 0 $border-radius;
-    padding: $padding;
-    font-size: $font-size;
-
-    &:focus {
-      outline-color: $color1;
+      .blue-text {
+        color: $color-blue;
+      }
+      .red-text {
+        color: $color-red;
+      }
+      &:hover {
+        .blue-text {
+          color: $color-red;
+        }
+        .red-text {
+          color: $color-blue;
+        }
+      }
     }
   }
+  .search-wrapper {
+    form {
+      @include flex-row;
+      gap: 10px;
 
-  button {
-    border: none;
-    padding: $padding;
-    border-radius: 0 $border-radius $border-radius 0;
-    background-color: $color1;
-    font-size: $font-size;
-    color: white;
-    cursor: pointer;
+      input {
+        border: $border;
+        padding: $padding;
+        border-radius: $border-radius;
+
+        &:focus {
+          outline: $color-red auto 5px;
+        }
+      }
+
+      button {
+        padding: $padding;
+        border-radius: $border-radius;
+        background-color: $color-blue;
+        color: white;
+        border: none;
+        cursor: pointer;
+        &:hover {
+          background-color: $color-red;
+        }
+      }
+    }
+  }
+}
+.right-side-wrapper {
+  @include flex-row;
+  gap: 10px;
+  align-items: center;
+
+  ul {
+    @include flex-row;
+    gap: 10px;
+
+    li {
+      list-style: none;
+      a {
+        text-decoration: none;
+        color: $color-blue;
+      }
+    }
+    li:hover {
+      a {
+        color: $color-red;
+      }
+    }
   }
 }
 
-ul {
-  display: flex;
-  list-style: none;
-  gap: 15px;
-}
+@media screen and (max-width: 768px){
 
-a mat-icon {
-  color: black;
-}
+  mat-toolbar {
+    height: auto;
+    padding: $padding;
+  }
 
-li:hover a mat-icon{
-  color: $color1;
-  cursor: pointer;
-}
+  .header-wrapper {
+    @include flex-column;
 
-a {
-  text-decoration: none;
-}
+    .left-side-wrapper {
+      @include flex-column;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .search-wrapper {
+      width: 100%;
+      form {
+        input {
+          width: 65%;
+        }
+        button {
+          width: 35%;
+        }
+      }
+    }
+    .right-side-wrapper {
+      @include flex-row;
+      justify-content: center;
 
-p:hover {
-  cursor: pointer;
+      ul {
+        margin: 10px 0px 0px 0px;
+        width: 100%;
+        @include flex-right;        
+        li {
+          a {
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+  
 }

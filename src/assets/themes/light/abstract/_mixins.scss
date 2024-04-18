@@ -1,0 +1,43 @@
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-right {
+  display: flex;
+  alight-items: center;
+  justify-content: right;
+}
+
+@mixin flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+@mixin button-def {
+  border: none;
+  padding: $padding;
+  border-radius: $border-radius;
+  background-color: white;
+  border: $color-red solid 2px;
+  color: $color-red;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+@mixin box-shadow {
+  margin: 5px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}

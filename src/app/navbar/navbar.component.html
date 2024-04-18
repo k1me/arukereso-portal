@@ -1,16 +1,21 @@
 <mat-toolbar>
   <div class="header-wrapper">
     <div class="left-side-wrapper">
-      <p>
-        <a href="">
-          <span class="blue-text">portéka-fürkésző</span>
-          <span class="red-text">!</span>
-        </a>
-      </p>
+      <a href="">
+        <span class="blue-text">portéka-fürkésző</span>
+        <span class="red-text">!</span>
+      </a>
       <div class="search-wrapper">
         <form (ngSubmit)="searchProducts()">
-          <input type="search" [(ngModel)]="searchTerm" placeholder="Mit keres?" [maxLength]="100" name="searchTerm" />
-          <button type="submit">Keresés</button>
+          <input
+            matInput
+            type="search"
+            [(ngModel)]="searchTerm"
+            placeholder="Mit keres?"
+            [maxLength]="100"
+            name="searchTerm"
+          />
+          <button mat-button type="submit">Keresés</button>
         </form>
       </div>
     </div>
@@ -23,7 +28,9 @@
           <a routerLink="/account"><mat-icon>account_circle</mat-icon></a>
         </li>
         <ng-template #notLoggedIn>
-          <a routerLink="/login"><mat-icon>account_circle</mat-icon></a>
+          <li>
+            <a routerLink="/login"><mat-icon>account_circle</mat-icon></a>
+          </li>
         </ng-template>
       </ul>
     </div>

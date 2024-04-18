@@ -1,39 +1,33 @@
-$color1: #00b7ff;
-$color2: #fa6363;
-$padding: 10px;
-$border-radius: 5px;
-$font-size: 16px;
-$border: $color1 solid 2px;
+@import "../../../../assets/themes/light/abstract/variables";
+@import "../../../../assets/themes/light/abstract/mixins";
 
 .feature-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 25px;
+  padding: $padding;
+  margin: $padding;
+  mat-card {
+    @include box-shadow;
+    padding: $padding;
 
-    h2 {
-        color: $color1;
-        font-size: 24px;
-        margin-bottom: 10px;
-    }
-    .button-wrapper {
-        display: flex;
-        flex-direction: column;
+    .deletion-wrapper {
+      @include flex-center;
+      @include flex-column;
+
+      h2 {
+        font-size: $font-size-big;
+        margin: $margin;
+      }
+      .button-wrapper {
+        @include flex-column;
         gap: 5px;
-        
+
         button {
-            padding: $padding;
-            border-radius: $border-radius;
-            background-color: white;
-            border:$color2 solid 2px;
-            color: $color2;
-            font-size: 16px;
-            cursor: pointer;
+          @include button-def;
         }
         button:hover {
-            background-color: $color2;
-            color: white;
+          background-color: $color-red;
+          color: white;
         }
+      }
     }
+  }
 }

@@ -1,0 +1,24 @@
+@import "../../../../../assets/themes/light/abstract/variables";
+@import "../../../../../assets/themes/light/abstract/mixins";
+
+.order-wrapper {
+    @include flex-column;
+  padding: $padding;
+  margin: $padding;
+  .order-list {
+    @include flex-column;
+    mat-card {
+      @include box-shadow;
+      &:hover {
+        cursor: pointer;
+      }
+      padding: $padding;
+
+      .prodcts-data-wrapper {
+        padding: $padding;
+        @include flex-column;
+        gap: 10px
+      }
+    }
+  }
+}

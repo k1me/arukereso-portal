@@ -35,7 +35,7 @@ import { OrdersComponent } from './navbar/account/orders/orders.component';
 import { OrderComponent } from './navbar/account/orders/order/order.component';
 import { HungarianForintStrongPipe } from './shared/pipes/hungarian-forint-strong.pipe';
 import { DateFormatPipe } from './shared/pipes/date-format.pipe';
-
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -73,6 +73,7 @@ import { DateFormatPipe } from './shared/pipes/date-format.pipe';
     ReactiveFormsModule,
     MatInputModule,
     MatCardModule,
+    MatButtonModule,
   ],
   providers: [
     provideAnimationsAsync(),

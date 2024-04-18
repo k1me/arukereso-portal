@@ -1,17 +1,14 @@
 <div class="order-wrapper">
-  <div class="order-list">
-    <div *ngFor="let order of orders">
-        <mat-card [routerLink]="'order/' + order.id">
-            <div class="order-header" >
-                <span>Rendelés azonosító: {{ order.id }}</span>
-                <span>Rendelés dátuma: {{ order.date }}</span>
-            </div>
-            <div class="order-content">
-                <span>Termékek száma: {{ order.products.length }}</span>
-                <span>Összeg: {{ order.total }} Ft</span>
-            </div>
-        </mat-card>
-    </div>
+  <div *ngFor="let order of orders" class="order-list">
+    <mat-card [routerLink]="'order/' + order.id">
+      <div class="order-header">
+        <h3>Rendelés azonosító: {{ order.id }}</h3>
+      </div>
+      <div class="order-content">
+        <span>Termékek száma: {{ order.products.length }}</span>
+        <span>Összeg: {{ order.total | hungarianForintStrong}}</span>
+      </div>
+    </mat-card>
   </div>
 </div>
 <router-outlet></router-outlet>

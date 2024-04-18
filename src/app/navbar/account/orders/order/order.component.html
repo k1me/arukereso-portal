@@ -1,39 +1,28 @@
-<div class="product-wrapper">
-    <div>
-        <mat-card>
-            <mat-card-header>
-                <mat-card-title>
-                    <h4>Order Details</h4>
-                </mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-                <div class="">
-                    <div class="">
-                        <div class="">Rendelési azonosító</div>
-                        <div class="">{{ order.id }}</div>
-                    </div>
-                    <div class="">
-                        <div class="">Rendelés dátuma</div>
-                        <div class="">{{ order.date }}</div>
-                    </div>
-                    <div class="">
-                        <div class="">Rendelés összege</div>
-                        <div class="">{{ order.total | hungarianForintStrong }}</div>
-                    </div>
-
-                </div>
-                <div class="">
-                    <div class="">
-                        <div class="">Termék</div>
-                        <div class="">Ár</div>
-                    </div>
-                    <div class="" *ngFor="let item of order.products">
-                        <div class="">{{ item.name }}</div>
-                        <div class="">{{ item.price | hungarianForintStrong }}</div>
-                    </div>
-                </div>
-            </mat-card-content>
-        </mat-card>
-    </div>
+<div class="order-wrapper">
+  <div class="order-list">
+    <mat-card>
+      <h3>Rendelés adatai</h3>
+      <div>
+        <div>
+          <span>Rendelési azonosító: {{ order.id }}</span>
+          <div></div>
+        </div>
+        <div>
+          <span>Rendelés dátuma: {{ order.date | dateFormat }}</span>
+          <span class=""></span>
+        </div>
+      </div>
+      <div>
+        <div class="prodcts-data-wrapper" *ngFor="let item of order.products">
+          <span>Termék: {{ item.name }}</span>
+          <span>Ár: {{ item.price | hungarianForintStrong }}</span>
+        </div>
+        <div>
+          <span>Rendelés összege: </span>
+          <span>{{ order.total | hungarianForintStrong }}</span>
+        </div>
+      </div>
+    </mat-card>
+  </div>
 </div>
 <router-outlet></router-outlet>

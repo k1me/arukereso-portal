@@ -1,15 +1,30 @@
-<div class="dashboard-wrapper">
-  <h2>Üdvözli a Portéka-fürkésző oldal!</h2>
-  <div class="account-progress">
+<div class="dashboard-wrapper" *ngIf="progress === 100; else welcome">
+  <mat-card>
+    <h2>Üdvözli a Portéka-fürkésző oldal,</h2>
+    <h2>{{ user.firstName }}!</h2>
     <div class="progress-container">
-      <div class="progress-bar" id="progress-bar">{{ progress }}%</div>      
+      <div class="progress-bar" [style.width.%]="progress">{{ progress }}%</div>
     </div>
-    <div>
-      <h3>Felhasználói fiókja már majdnem kész!</h3>
-      <p>Töltse fel adataival fiókját most a gyorsabb vásárláshoz!</p>
-      <button>
-        <a routerLink="/account/profile">Profil kitöltése</a>
-      </button>
-    </div>
-  </div>
+  </mat-card>
 </div>
+<ng-template #welcome>
+  <div class="dashboard-wrapper">
+    <mat-card>
+      <h2>Üdvözli a Portéka-fürkésző oldal!</h2>
+      <div class="account-progress">
+        <div class="progress-container">
+          <div class="progress-bar" [style.width.%]="progress">
+            <span>{{ progress }}%</span>
+          </div>
+        </div>
+        <div class="inside-wrapper">
+          <h3>Felhasználói fiókja már majdnem kész!</h3>
+          <p>Töltse fel adataival fiókját most a gyorsabb vásárláshoz!</p>
+          <button mat-button>
+            <a routerLink="/account/profile">Profil kitöltése</a>
+          </button>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</ng-template>

@@ -13,11 +13,12 @@ export class CartService {
   products: Product[] = [];
   productsChanged = new Subject<Product[]>();
 
-
-  constructor(private db: AngularFirestore, private orderService: OrderService) {
+  constructor(
+    private db: AngularFirestore,
+    private orderService: OrderService
+  ) {
     this.getProducts();
   }
-
 
   addToCart(product: Product) {
     this.products = JSON.parse(sessionStorage.getItem('cart') || '') || [];
@@ -82,5 +83,4 @@ export class CartService {
       throw error;
     }
   }
-  
 }

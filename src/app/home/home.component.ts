@@ -9,10 +9,9 @@ import { CartService } from '../shared/services/cart.service';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
+  private productSub: Subscription = new Subscription();
   loading = true;
   products: Product[] = [];
-  private productSub: Subscription = new Subscription();
-
   categories: Set<string> = new Set();
 
   constructor(private cartService: CartService) {}

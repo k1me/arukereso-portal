@@ -1,8 +1,12 @@
 <div class="feature-content">
-    <h2>Biztos ki akar jelentkezni?</h2>
-    <div class="button-wrapper">
-        <button mat-raised-button color="primary" (click)="logout()">Kijelentkezés</button>
-    </div>
+    <mat-card>
+
+        <div class="logout-wrapper">
+            <h2>Biztos ki akar jelentkezni?</h2>
+            <button mat-raised-button color="primary" (click)="logout()">
+                Kijelentkezés
+            </button>
+        </div>
+    </mat-card>
 </div>
 <router-outlet></router-outlet>
-
