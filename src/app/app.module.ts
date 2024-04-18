@@ -32,6 +32,9 @@ import { MatCardModule } from '@angular/material/card';
 import { ProductComponent } from './home/products/product/product.component';
 import { ProductUploadComponent } from './navbar/account/product-upload/product-upload.component';
 import { OrdersComponent } from './navbar/account/orders/orders.component';
+import { OrderComponent } from './navbar/account/orders/order/order.component';
+import { HungarianForintStrongPipe } from './shared/pipes/hungarian-forint-strong.pipe';
+import { DateFormatPipe } from './shared/pipes/date-format.pipe';
 
 
 @NgModule({
@@ -52,7 +55,9 @@ import { OrdersComponent } from './navbar/account/orders/orders.component';
     ProductComponent,
     ProductUploadComponent,
     OrdersComponent,
-    
+    OrderComponent,
+    HungarianForintStrongPipe,
+    DateFormatPipe,
   ],
   imports: [
     BrowserModule,
