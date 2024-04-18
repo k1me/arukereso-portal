@@ -14,11 +14,16 @@ import { ProductsComponent } from './home/products/products.component';
 import { ProductComponent } from './home/products/product/product.component';
 import { ProductUploadComponent } from './navbar/account/product-upload/product-upload.component';
 import { OrdersComponent } from './navbar/account/orders/orders.component';
+import { OrderComponent } from './navbar/account/orders/order/order.component';
+
+const orderRoutes: Routes = [
+  { path: 'order/:id', component: OrderComponent },
+];
 
 const accountRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'orders', component: OrdersComponent },
+  { path: 'orders', component: OrdersComponent, children: orderRoutes },
   { path: 'password', component: PasswordComponent },
   { path: 'deletion', component: DeletionComponent},
   { path: 'logout', component: LogoutComponent },
