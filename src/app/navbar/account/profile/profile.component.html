@@ -33,7 +33,7 @@
       <p>{{user.role ? "admin" : "felhasználó"}}</p>
 
       <label>Regisztrálva ekkor:</label>
-        <p>{{user.registeredOn}}</p>
+        <p>{{user.registeredOn | dateFormat }}</p>
     </div>
   </div>
 </form>
