@@ -18,9 +18,8 @@ export class DashboardComponent {
   constructor(
     private userService: UserService,
     private authService: AuthService
-  ) {
-  }
-  
+  ) {}
+
   async ngOnInit() {
     await this.getUser();
   }
@@ -33,14 +32,12 @@ export class DashboardComponent {
         this.updateProgress();
       });
     }
-
   }
 
   updateProgress() {
     if (this.user.address !== '') {
       this.progressCntr += 1;
     }
-    console.log(this.user.address);
     if (this.user.firstName !== '') {
       this.progressCntr += 1;
     }
@@ -49,6 +46,6 @@ export class DashboardComponent {
     }
 
     this.progressBar = (this.progressCntr / this.maxProgress) * 100;
-    this.progress = this.progressBar;
+    this.progress = Math.round(this.progressBar);
   }
 }

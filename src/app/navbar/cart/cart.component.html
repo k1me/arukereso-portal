@@ -5,7 +5,7 @@
       <li *ngFor="let product of cart">
         <mat-card> 
           <p>
-            {{ product.name }} - {{ product.price | currency }} 
+            {{ product.name }} - {{ product.price | hungarianForintStrong}} 
             <button (click)="removeFromCart(product.id)">-</button>
           </p>
         </mat-card>

@@ -43,11 +43,13 @@ export class PasswordComponent implements OnInit {
   async validatePassword(oldPassword: string) {
     const user = await this.afAuth.currentUser;
     if (!user) {
-      throw new Error('Nincs bejelentkezett felhasználó.');
+      alert('Nincs bejelentkezett felhasználó!');
+      throw new Error('Nincs bejelentkezett felhasználó!');
     }
     const email = user.email;
     if (!email || oldPassword === '') {
-      throw new Error('Nincs jelszó megadva.');
+      alert('Nincs jelszó megadva!')
+      throw new Error('Nincs jelszó megadva!');
     }
     await this.changeOldPassword(email, oldPassword);
   }

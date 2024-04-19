@@ -1,63 +1,61 @@
-$color1: #00b7ff;
-$color2: #fa6363;
-$padding: 25px;
-$border-radius: 20px;
-$font-size: 20px;
-$border: $color1 solid 1px;
+@import "../../../../assets/themes/light/abstract/mixins";
+@import "../../../../assets/themes/light/abstract/variables";
 
 .login-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: $padding;
+  @include flex-center;
+  padding: $padding;
 }
 
 .login-form-wrapper {
-    display: flex;
-    flex-direction: row;
-    gap: $padding;
-    align-items: center;
-    border: $border;
-    border-radius: $border-radius;
-    padding-right: $padding;
+  display: flex;
+  flex-direction: row;
+  gap: $padding;
+  align-items: center;
+  border: $border;
+  border-radius: $border-radius;
+  padding-right: $padding;
 
-    img {
-        width: 370px;
-        border-radius: $border-radius;
-    }
+  img {
+    width: 370px;
+    border-radius: $border-radius;
+  }
 }
 
 .login-right {
-    display: flex;
-    flex-direction: column;
-    padding: $padding;
-    border-radius: $border-radius;
-    color: $color1;
-    font-size: $font-size;
+  display: flex;
+  flex-direction: column;
+  padding: $padding;
+  border-radius: $border-radius;
+  color: $color-blue;
 
-    h2 {
-        font-size: 35px;
-        margin-bottom: 5px;
-    }
+  h2 {
+    font-size: $font-size-big;
+    margin-bottom: 5px;
+  }
 
-    button {
-        border: $color2 solid 2px;
-        padding: $padding;
-        border-radius: $border-radius;
-        background-color: white;
-        color: $color2;
-        font-size: $font-size;
-        cursor: pointer;
-    }
-    button:hover {
-        background-color: $color2;
-        color: white;
-    }
+  button {
+    @include button-def;
+  }
+  button:hover {
+    background-color: $color-red;
+    color: white;
+  }
 }
 
 .login-right a {
-    color: $color2;
-    font-size: $font-size;
-    margin-top: 10px;
-    align-self: center;
+  color: $color-red;
+  margin-top: 10px;
+  align-self: center;
+}
+
+
+@media screen and (max-width: 768px) {
+  .login-form-wrapper {
+    @include flex-column;
+    padding: 0px 0px $padding 0px;
+
+    img {
+        width: 100%;
+    }
+}
 }

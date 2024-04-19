@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Product } from '../../../shared/interfaces/product';
 import { ActivatedRoute } from '@angular/router';
 import { CartService } from '../../../shared/services/cart.service';
+import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-product',
@@ -18,7 +19,7 @@ export class ProductComponent {
     price: 0,
   };
 
-  constructor(private route: ActivatedRoute, private cartService: CartService) {
+  constructor(private route: ActivatedRoute, private cartService: CartService, private authService: AuthService) {
     this.getProduct();
   }
 
@@ -32,7 +33,11 @@ export class ProductComponent {
   }
 
   addToCart() {
-    console.log(this.product);
-    this.cartService.addToCart(this.product);
+    if (!sessionStorage.getItem('cart')) {
+      alert("Jelentkezzen be a termék kosárhoz adásához!");
+    }
+      console.log(this.authService.dbUser);
+      this.cartService.addToCart(this.product);
+      alert("Ez a termék hozzá lett adva a kosarához: " + this.product.name);
   }
 }

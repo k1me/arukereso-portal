@@ -5,7 +5,7 @@
         <span class="blue-text">portéka-fürkésző</span>
         <span class="red-text">!</span>
       </a>
-      <div class="search-wrapper">
+      <div class="search-wrapper" *ngIf="isUrlAllowed()">
         <form (ngSubmit)="searchProducts()">
           <input
             matInput

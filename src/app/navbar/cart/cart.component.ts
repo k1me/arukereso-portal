@@ -22,6 +22,7 @@ export class CartComponent {
     const uid = sessionStorage.getItem('session-cookie');
     if (uid && this.cart.length > 0) {
     this.cartService.addOrder(this.cart, uid);
+    alert('Köszönjük a vásárlást!')
     } else {
       this.error = 'Nincs bejelentkezve!';
     }

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { SearchService } from '../shared/services/search.service';
+import { NavigationEnd, Router, Event } from '@angular/router';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -8,13 +10,26 @@ import { SearchService } from '../shared/services/search.service';
 })
 export class NavbarComponent {
   searchTerm: string = '';
-  constructor(private searchService: SearchService) {}
+  currentUrl: string = '';
+  disAllowedUrls: string[] = ['/account', '/cart']
+  constructor(private searchService: SearchService, private router: Router) {}
+
+  ngOnInit() {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.currentUrl = event.url;
+      }
+    });
+  }
   isSessionSet(): any {
     return sessionStorage.getItem('session-cookie');
   }
 
   searchProducts() {
-    console.log(this.searchTerm)
     this.searchService.setSearchTerm(this.searchTerm);
+  }
+
+  isUrlAllowed():boolean {
+    return !this.disAllowedUrls.some((url) => this.currentUrl.startsWith(url));
   }
 }

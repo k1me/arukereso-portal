@@ -28,6 +28,7 @@ export class AuthService {
       case 'clear':
         sessionStorage.removeItem('session-cookie');
         sessionStorage.removeItem('user-role');
+        sessionStorage.removeItem('cart');
         break;
       case 'set_bonus':
         sessionStorage.setItem('user-role', value || '');

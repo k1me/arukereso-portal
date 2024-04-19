@@ -35,8 +35,9 @@ export class RegisterComponent {
 
     try {
       await this.authService.register(userData);
+      alert('Sikeres regisztráció!');
     } catch (error) {
-      console.log(error);
+      alert('Ez az e-mail már használatban van!');
     }
   }
 }

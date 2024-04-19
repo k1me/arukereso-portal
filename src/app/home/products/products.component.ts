@@ -12,7 +12,7 @@ import { CartService } from '../../shared/services/cart.service';
 })
 export class ProductsComponent {
   private routeSub: Subscription = new Subscription();
-  private searchSub: Subscription = new Subscription();
+  //private searchSub: Subscription = new Subscription();
   products: Product[] = [];
   category: string = '';
   searchTerm: string = '';
@@ -23,18 +23,16 @@ export class ProductsComponent {
     private searchService: SearchService
   ) {}
 
-  async ngOnInit() {
+  ngOnInit() {
     this.routeSub = this.route.params.subscribe((params) => {
       this.category = params['category'];
       this.getProducts();
       this.filterProducts();
     });
 
-    this.searchSub = this.searchService.searchTermChanged.subscribe(() => {
+    this.searchService.searchTermChanged.subscribe(() => {
       this.searchProducts();
     });
-
-    await this.getProducts();
   }
 
   async filterProducts() {
@@ -48,7 +46,7 @@ export class ProductsComponent {
     }
   }
 
-  async getProducts() {
+  getProducts() {
     this.products = this.cartService.products;
   }
 

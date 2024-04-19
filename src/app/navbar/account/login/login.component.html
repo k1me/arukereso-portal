@@ -1,7 +1,7 @@
+<form [formGroup]="loginForm" (ngSubmit)="login()">
 <div class="login-wrapper">
   <div class="login-form-wrapper">
-    <img src="../../../../assets/pictures/login_all.png" alt="login" />
-    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <img src="../../../../assets/pictures/login_all.png" alt="login" />
       <div class="login-right">
         <h2>Jelentkezzen be,</h2>
         <p>hogy egyszerűen és gyorsan tudja intézni rendeléseit.</p>
@@ -28,8 +28,8 @@
         <p>{{ errorMessage }}</p>
         <a routerLink="/register">Még nincs fiókja?</a>
       </div>
-    </form>
+    </div>
   </div>
-</div>
-
+</form>
+  
 <router-outlet></router-outlet>

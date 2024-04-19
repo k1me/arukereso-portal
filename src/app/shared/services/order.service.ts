@@ -17,7 +17,6 @@ export class OrderService {
     let total: number = 0;
     for (let product of cart) {
       total += Number(product.price);
-      console.log(typeof product.price);
     }
     try {
       await this.db.collection('Orders').add({
@@ -62,9 +61,8 @@ export class OrderService {
         .toPromise();
       if (snapshot && snapshot.docs.length > 0) {
         this.order = snapshot.docs[0].data() as Cart;
-        console.log(this.order);
       } else {
-        console.log('Nincs ilyen id-val rendelkező rendelés', id);
+        console.error('Nincs ilyen id-val rendelkező rendelés', id);
       }
     } catch (error) {
       console.error('Nem sikerült lekérni az adatokat', error);
