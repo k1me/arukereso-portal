@@ -133,3 +133,7 @@ mat-toolbar {
     }
   }
 }
+.icons-wrapper {
+  @include flex-row;
+  gap: 10px;
+}

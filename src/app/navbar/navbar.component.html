@@ -21,12 +21,14 @@
     </div>
     <div class="right-side-wrapper">
       <ul>
-        <li>
-          <a routerLink="/cart"><mat-icon>shopping_cart</mat-icon></a>
-        </li>
-        <li *ngIf="isSessionSet(); else notLoggedIn">
-          <a routerLink="/account"><mat-icon>account_circle</mat-icon></a>
-        </li>
+        <div *ngIf="isSessionSet(); else notLoggedIn" class="icons-wrapper">
+          <li>
+            <a routerLink="/cart"><mat-icon>shopping_cart</mat-icon></a>
+          </li>
+          <li>
+            <a routerLink="/account"><mat-icon>account_circle</mat-icon></a>
+          </li>
+        </div>
         <ng-template #notLoggedIn>
           <li>
             <a routerLink="/login"><mat-icon>account_circle</mat-icon></a>
