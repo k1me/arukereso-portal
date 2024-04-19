@@ -12,7 +12,6 @@ import { CartService } from '../../shared/services/cart.service';
 })
 export class ProductsComponent {
   private routeSub: Subscription = new Subscription();
-  //private searchSub: Subscription = new Subscription();
   products: Product[] = [];
   category: string = '';
   searchTerm: string = '';

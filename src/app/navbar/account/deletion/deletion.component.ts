@@ -29,7 +29,6 @@ export class DeletionComponent {
     try {
       await this.validatePassword(password);
     } catch (error) {
-      //console.error('Hiba a fiók törlése során:', error);
       this.errorMessage = 'Nem megfelelő jelszó.';
     }
   }
